@@ -322,7 +322,7 @@ function Login({ userDetails, setUserDetails }) {
                       <p>Remain signed in </p>
                       
                     </div>
-                    <p className="my-5">* Forgot password ?</p>
+                    <p className="my-5 text-red-500">* Forgot password ?</p>
                     <div>
                       {!btnState ? (
                         <button

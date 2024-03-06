@@ -19,6 +19,7 @@ import user_octagon from "../images/user_octagon.png";
 import transaction_minus from "../images/transaction_minus.png";
 import buy_crypto from "../images/buy_crypto.png";
 import logo_blue from "../images/logo_blue.png";
+import BottonNav from "../components/BottonNav";
 
 let dotEnv = import.meta.env;
 
@@ -33,7 +34,6 @@ function ExpandSideBar({
   handleCreateNew,
   customersNav,
 }) {
-
   let baseUrl, url;
   if (dotEnv.MODE === "development") {
     baseUrl = dotEnv.VITE_DEV_URL;
@@ -279,6 +279,8 @@ function ExpandSideBar({
   );
 }
 
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
   return (
     <div className="fixed z-20 left-0 top-0 h-full w-[5%] bg-slate-50">
@@ -369,6 +371,8 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
   );
 }
 
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
 function SideBar({ due, setDue }) {
   const navigate = useNavigate();
   const [showDues, setShowDues] = useState(false);
@@ -415,7 +419,6 @@ function SideBar({ due, setDue }) {
   });
 
   const [dbItems, setDbItems] = useState("Invoices");
-
 
   let baseUrl, url;
   if (dotEnv.MODE === "development") {
@@ -801,58 +804,67 @@ function SideBar({ due, setDue }) {
       alert(data.message);
     }
   }
-
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
     <div className="overflow-scroll">
-      {navBarState === "expand" ? (
-        <ExpandSideBar
+      <div className="xs:max-xl:hidden">
+        {navBarState === "expand" ? (
+          <ExpandSideBar
+            navItems={navItems}
+            setNavItems={setNavItems}
+            setNavBarState={setNavBarState}
+            getResponse={getResponse}
+            handleTransact={handleTransact}
+            transactNav={transactNav}
+            setCustomersNav={setCustomersNav}
+            handleCreateNew={handleCreateNew}
+            customersNav={customersNav}
+          />
+        ) : (
+          <CollapseSideBar
+            navItems={navItems}
+            setNavItems={setNavItems}
+            setNavBarState={setNavBarState}
+          />
+        )}
+      </div>
+      <div className="xl:hidden">
+        <BottonNav
           navItems={navItems}
           setNavItems={setNavItems}
           setNavBarState={setNavBarState}
-          getResponse={getResponse}
-          handleTransact={handleTransact}
-          transactNav={transactNav}
-          setCustomersNav={setCustomersNav}
-          handleCreateNew={handleCreateNew}
-          customersNav={customersNav}
         />
-      ) : (
-        <CollapseSideBar
-          navItems={navItems}
-          setNavItems={setNavItems}
-          setNavBarState={setNavBarState}
-        />
-      )}
-      {/* <div className="relative z-10 bg-red-300">
-            kkndkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-        </div> */}
+      </div>
+
       <div
-        className={` fixed z-10 h-full right-0 top-0 ${
+        className={` fixed z-10 h-full overflow-scroll right-0 top-0 ${
           navBarState === "expand"
-            ? "left-[20%] bg-green-500"
-            : "left-[5%] bg-yellow-500"
+            ? "left-[20%] bg-green-500 xs:max-xl:left-0"
+            : "left-[5%] bg-yellow-500 xs:max-xl:left-0"
         }`}
       >
-        <div className="bg-slate-100 h-28 px-2 flex justify-between p-5 w-full">
-          <div className="flex w-[50%] ml-5 gap-5 items-center">
-            <div className="w-[50%]">
-              <h2 className="font-semibold text-xl text-gray-950">
-                Hello {user.firstName + " " + user.lastName}!
+        {/* header details */}
+        <div className="bg-slate-100 h-28 xs:max-xl:h-auto px-2 flex justify-between p-5 w-full">
+          {/* Olalekan Oladimeji Header Div */}
+          <div className="flex xs:max-xl:flex-col w-[50%] xs:max-xl:w-2/3 ml-5 xs:max-xl:ml-2 xs:max-xl:gap-0 gap-5 items-center bg-red-40">
+            <div className="w-[50%] xs:max-xl:w-full">
+              <h2 className="font-semibold text-xl xs:max-xl:text-lg text-gray-950">
+                Hello, {user.firstName + " " + user.lastName}!
               </h2>
-              <p className="text-slate-500 font-normal text-base">
+              <p className="text-slate-500 font-normal text-base xs:max-xl:hidden">
                 Manage your payments today!
               </p>
             </div>
-            <div className="relative bg-red-20 w-[40%]">
+            <div className="relative bg-red-20 w-[40%] xs:max-xl:w-full">
               <div className="absolute w-5 h-5 rounded-full bg-blue-600 top-2 left-2"></div>
               <input
                 type="text"
-                className="w-full px-10 py-2 rounded-lg bg-slate-200"
+                className="w-full px-10 py-2 xs:max-xl:py-1 rounded-lg bg-slate-200"
                 placeholder="Search (Ctrl+/)"
               />
             </div>
           </div>
-          <div className="relative flex items-center gap-3 justify-end bg-red-40 w-[35%]">
+          <div className="relative flex xs:max-xl:hidden items-center gap-3 justify-end bg-red-40 w-[35%]">
             {newCustomer && (
               <div className=" flex items-center justify-evenly absolute w-full h-14 rounded-lg z-50 bg-slate-50 shadow shadow-slate-400 top-10 right-80">
                 <div className="w-[15%] bg-red-30 flex items-center justify-center">
@@ -928,14 +940,18 @@ function SideBar({ due, setDue }) {
             <div></div>
           </div>
         </div>
+
+        {/* main content */}
         <div
           className={`relative bg-gray-100 h-full flex pt-20 justify-center`}
         >
+          {/* dashboard route */} 
           {navItems === "Dashboard" && (
             <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-40 p-3">
               <div className="w-full h-full relative">
-                <div className=" bg-yellow-30 gap-5 flex">
-                  <div className="w-[25%] h-96 flex flex-col rounded-md overflow-hidden bg-slate-50 shadow shadow-slate-300">
+                <div className=" bg-yellow-30 gap-5 flex xs:max-xl:flex-col">
+                  {/* multi color design */}
+                  <div className="w-[25%] xs:max-xl:w-full h-96 flex flex-col rounded-md overflow-hidden bg-slate-50 shadow shadow-slate-300">
                     <div className="bg-[#8347E7] h-36">
                       <img
                         src={dashboard_multi}
@@ -963,23 +979,65 @@ function SideBar({ due, setDue }) {
                       </div>
                     </div>
                   </div>
-                  <div className="w-[72%] bg-red-30">
-                    <div className="flex items-center justify-between">
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+
+                  {/* analytics count; customers, paid, debt */}
+                  <div className="w-[72%] xs:max-xl:w-full bg-red-30">
+                    <div className="flex xs:max-xl:flex-col xs:max-xl:gap-3 items-center justify-between">
+                      <div className="xl:hidden w-full flex justify-evenly bg-red-40">
+                        {/* total customers */}
+                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                          <p className="font-light text-sm">Total Customers</p>
+                          <p className="font-bold">
+                            {navRes.dashboard.totalCustomers}
+                          </p>
+                          <p className="text-lime-400">0% </p>
+                        </div>
+                        {/* total payment */}
+                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                          <p className="font-light text-sm">Total Payment</p>
+                          <p className="font-bold">
+                            {navRes.dashboard.totalPaid}
+                          </p>
+                          <p className="text-lime-400">0% </p>
+                        </div>
+                      </div>
+                      {/* total customers */}
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
                         <p className="font-light text-sm">Total Customers</p>
                         <p className="font-bold">
                           {navRes.dashboard.totalCustomers}
                         </p>
                         <p className="text-lime-400">0% </p>
                       </div>
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                      {/* total payment */}
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
                         <p className="font-light text-sm">Total Payment</p>
                         <p className="font-bold">
                           {navRes.dashboard.totalPaid}
                         </p>
                         <p className="text-lime-400">0% </p>
                       </div>
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+
+                      <div className="xl:hidden w-full flex justify-evenly bg-red-40">
+                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                          <p className="font-light text-sm">
+                            Total active Invoices
+                          </p>
+                          <p className="font-bold">
+                            {navRes.dashboard.totalInvoice}
+                          </p>
+                          <p className="text-lime-400">0% </p>
+                        </div>
+                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                          <p className="font-light text-sm">Total Debt</p>
+                          <p className="font-bold text-xl text-red-600">
+                            {navRes.dashboard.totalDebt}
+                          </p>
+                          <p className="text-lime-400">0% </p>
+                        </div>
+                      </div>
+
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
                         <p className="font-light text-sm">
                           Total active Invoices
                         </p>
@@ -988,7 +1046,7 @@ function SideBar({ due, setDue }) {
                         </p>
                         <p className="text-lime-400">0% </p>
                       </div>
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
                         <p className="font-light text-sm">Total Debt</p>
                         <p className="font-bold text-xl text-red-600">
                           {navRes.dashboard.totalDebt}
@@ -2119,8 +2177,11 @@ function SideBar({ due, setDue }) {
                         {navRes.transaction.map((items, index) => {
                           return (
                             <div className="border-b-[1px] border-slate-300 px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
-                              { showInvoice && (
-                                <div onClick={()=> setShowInvoice(false)} className="absolute flex items-center justify-center bg-red-200 left-0 h-full w-full">
+                              {showInvoice && (
+                                <div
+                                  onClick={() => setShowInvoice(false)}
+                                  className="absolute flex items-center justify-center bg-red-200 left-0 h-full w-full"
+                                >
                                   <div>
                                     <div classNmae="flex justify-between bg-red-800">
                                       <div>
@@ -2143,8 +2204,8 @@ function SideBar({ due, setDue }) {
                                       </div>
                                     </div>
                                   </div>
-                                </div>)
-                              }
+                                </div>
+                              )}
                               <div>
                                 <input type="checkbox" />
                               </div>
@@ -2206,7 +2267,7 @@ function SideBar({ due, setDue }) {
                                     <div>
                                       <DeleteOutlineIcon />
                                     </div>
-                                    <div onClick={()=> setShowInvoice(true)}>
+                                    <div onClick={() => setShowInvoice(true)}>
                                       <RemoveRedEyeOutlinedIcon />
                                     </div>
                                     <div>
