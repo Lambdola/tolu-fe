@@ -864,6 +864,7 @@ function SideBar({ due, setDue }) {
               />
             </div>
           </div>
+
           <div className="relative flex xs:max-xl:hidden items-center gap-3 justify-end bg-red-40 w-[35%]">
             {newCustomer && (
               <div className=" flex items-center justify-evenly absolute w-full h-14 rounded-lg z-50 bg-slate-50 shadow shadow-slate-400 top-10 right-80">
@@ -913,6 +914,7 @@ function SideBar({ due, setDue }) {
                   })}
               </div>
             </div>
+
             <div className="relative w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center">
               <div className="absolute -bottom-0 -right-1 w-5 h-5 p-1 rounded-full bg-slate-100">
                 <div className="w-full h-full bg-green-600 rounded-full"></div>
@@ -926,8 +928,6 @@ function SideBar({ due, setDue }) {
             <div>
               <h2 className="font-semibold text-xl text-gray-950">
                 {user.firstName + " " + user.lastName}!
-                {/* {sue.length}
-                {typeof(due)} */}
               </h2>
               <p className="text-slate-500 font-normal text-base">
                 {user.businessName ? (
@@ -945,7 +945,7 @@ function SideBar({ due, setDue }) {
         <div
           className={`relative bg-gray-100 h-full flex pt-20 justify-center`}
         >
-          {/* dashboard route */} 
+          {/* dashboard route */}
           {navItems === "Dashboard" && (
             <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-40 p-3">
               <div className="w-full h-full relative">
@@ -955,7 +955,7 @@ function SideBar({ due, setDue }) {
                     <div className="bg-[#8347E7] h-36">
                       <img
                         src={dashboard_multi}
-                        className="h-full w-full object-fit"
+                        className="h-full w-full object-fit xs:max-xl:object-cover"
                       />
                     </div>
                     <div className="pt-2 px-5">
@@ -984,164 +984,149 @@ function SideBar({ due, setDue }) {
                   <div className="w-[72%] xs:max-xl:w-full bg-red-30">
                     <div className="flex xs:max-xl:flex-col xs:max-xl:gap-3 items-center justify-between">
                       <div className="xl:hidden w-full flex justify-evenly bg-red-40">
-                        {/* total customers */}
-                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                          <p className="font-light text-sm">Total Customers</p>
-                          <p className="font-bold">
-                            {navRes.dashboard.totalCustomers}
-                          </p>
-                          <p className="text-lime-400">0% </p>
-                        </div>
-                        {/* total payment */}
-                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                          <p className="font-light text-sm">Total Payment</p>
-                          <p className="font-bold">
-                            {navRes.dashboard.totalPaid}
-                          </p>
-                          <p className="text-lime-400">0% </p>
-                        </div>
-                      </div>
-                      {/* total customers */}
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
-                        <p className="font-light text-sm">Total Customers</p>
-                        <p className="font-bold">
-                          {navRes.dashboard.totalCustomers}
-                        </p>
-                        <p className="text-lime-400">0% </p>
-                      </div>
-                      {/* total payment */}
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
-                        <p className="font-light text-sm">Total Payment</p>
-                        <p className="font-bold">
-                          {navRes.dashboard.totalPaid}
-                        </p>
-                        <p className="text-lime-400">0% </p>
+                        {[
+                          {
+                            title: "Total Customers",
+                            data: navRes.dashboard.totalCustomers,
+                          },
+                          {
+                            title: "Total Payment",
+                            data: navRes.dashboard.totalPaid,
+                          },
+                        ].map((items) => {
+                          return (
+                            <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                              <p className="font-light text-sm">
+                                {items.title}
+                              </p>
+                              <p className="font-bold">{items.data}</p>
+                              <p className="text-lime-400">0% </p>
+                            </div>
+                          );
+                        })}
                       </div>
 
                       <div className="xl:hidden w-full flex justify-evenly bg-red-40">
-                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                          <p className="font-light text-sm">
-                            Total active Invoices
-                          </p>
-                          <p className="font-bold">
-                            {navRes.dashboard.totalInvoice}
-                          </p>
-                          <p className="text-lime-400">0% </p>
-                        </div>
-                        <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                          <p className="font-light text-sm">Total Debt</p>
-                          <p className="font-bold text-xl text-red-600">
-                            {navRes.dashboard.totalDebt}
-                          </p>
-                          <p className="text-lime-400">0% </p>
-                        </div>
+                        {[
+                          {
+                            title: "Total active Invoices",
+                            data: navRes.dashboard.totalInvoice,
+                          },
+                          {
+                            title: "Total Debt",
+                            data: navRes.dashboard.totalDebt,
+                          },
+                        ].map((items) => {
+                          return (
+                            <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                              <p className="font-light text-sm">
+                                {items.title}
+                              </p>
+                              <p className="font-bold">{items.data}</p>
+                              <p className="text-lime-400">0% </p>
+                            </div>
+                          );
+                        })}
                       </div>
 
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
-                        <p className="font-light text-sm">
-                          Total active Invoices
-                        </p>
-                        <p className="font-bold">
-                          {navRes.dashboard.totalInvoice}
-                        </p>
-                        <p className="text-lime-400">0% </p>
-                      </div>
-                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
-                        <p className="font-light text-sm">Total Debt</p>
-                        <p className="font-bold text-xl text-red-600">
-                          {navRes.dashboard.totalDebt}
-                        </p>
-                        <p className="text-lime-400">0% </p>
-                      </div>
+                      {[
+                        {
+                          title: "Total Customers",
+                          data: navRes.dashboard.totalCustomers,
+                        },
+                        {
+                          title: "Total Payment",
+                          data: navRes.dashboard.totalPaid,
+                        },
+                        {
+                          title: "Total active Invoices",
+                          data: navRes.dashboard.totalInvoice,
+                        },
+                        {
+                          title: "Total Debt",
+                          data: navRes.dashboard.totalDebt,
+                        },
+                      ].map((items) => {
+                        return (
+                          <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
+                            <p className="font-light text-sm">{items.title}</p>
+                            <p className="font-bold">{items.data}</p>
+                            <p className="text-lime-400">0% </p>
+                          </div>
+                        );
+                      })}
                     </div>
+
+                    {/*  What would you like to get started with ? */}
                     <div>
                       <p className="py-2 text-black font-bold text">
                         What would you like to get started with ?
                       </p>
-                      <div className="flex justify-between h-full relative">
-                        <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
-                          <div className="flex justify-center items-center w-10 h-10 rounded bg-red-30 right-3 absolute">
-                            <img src={user_octagon} />
-                          </div>
-                          <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
-                            <div>
-                              <p className="font-bold text-base">
-                                New Customer
-                              </p>
-                              <div className="flex h-10">
-                                <div className="w-[80%] bg-red-80">
-                                  <p className="font-light text-red-90">
-                                    Quickly create profiles for your customers!
+                      <div className="flex xs:max-xl:flex-col justify-between h-full relative">
+                        {[
+                          {
+                            icon: user_octagon,
+                            title: "New Customer",
+                            text: "Quickly create profiles for your customers!",
+                            path: "CreateNew",
+                          },
+                          {
+                            icon: transaction_minus,
+                            title: "Get Paid",
+                            text: "Send an invoice to a owing customer!",
+                            path: "Invoices",
+                          },
+                          {
+                            icon: buy_crypto,
+                            title: "Just made a sale ?",
+                            text: "Quickly record transaction!",
+                            path: "Invoices",
+                          },
+                        ].map((items) => {
+                          return (
+                            <div className="relative w-[32%] xs:max-xl:flex xs:max-xl:w-full h-[13.5rem] bg-slate-500 rounded-lg py-4 xs:max-xl:p-0">
+                              <div className="flex justify-center items-center w-10 xs:max-xl:w-[20%] h-10 rounded bg-red-300 right-3 xs:max-xl:inset-0 absolute xs:max-xl:relative">
+                                <img
+                                  src={items.icon}
+                                  className="xs:max-xl:w-10 xs:max-xl:h-10 xs:max-xl:object-cover"
+                                />
+                              </div>
+                              <div className="xs:max-xl:w-[80%] rounded bg-red-500 left-3 right-3 absolute xs:max-xl:relative bottom-5 xs:max-xl:inset-0 ">
+                                <div>
+                                  <p className="font-bold text-base">
+                                    {items.title}
                                   </p>
-                                </div>
-                                <div
-                                  onClick={() => {
-                                    setNavItems("CreateNew");
-                                  }}
-                                  className="flex justify-center items-center w-[20%] bg-blue-40"
-                                >
-                                  <img src={logo_blue} />
+                                  <div className="flex h-10">
+                                    <div className="w-[80%] bg-red-80">
+                                      <p className="font-light text-red-90">
+                                        {items.text}
+                                      </p>
+                                    </div>
+                                    {items.title === "Just made a sale ?" ? (
+                                      <div
+                                        onClick={() => {
+                                          setNavItems("CreateNew");
+                                        }}
+                                        className="flex justify-center items-center w-[20%] bg-blue-40"
+                                      >
+                                        <img src={logo_blue} />
+                                      </div>
+                                    ) : (
+                                      <div
+                                        onClick={() => {
+                                          setNavItems(items.path);
+                                        }}
+                                        className="flex justify-center items-center w-[20%] bg-blue-40"
+                                      >
+                                        <img src={logo_blue} />
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
-                          <div className="flex justify-center items-center w-10 h-10 rounded bg-red-30 right-3 absolute">
-                            <img src={transaction_minus} />
-                          </div>
-                          <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
-                            <div>
-                              <p className="font-bold text-base">Get Paid</p>
-                              <div className="flex h-10">
-                                <div className="w-[80%] bg-red-80">
-                                  <p className="font-light">
-                                    Send an invoice to a owing customer!
-                                  </p>
-                                </div>
-                                <div
-                                  onClick={() => {
-                                    setNavItems("Invoices");
-                                  }}
-                                  className="flex justify-center items-center w-[20%] bg-blue-40"
-                                >
-                                  <img src={logo_blue} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
-                          <div className="flex justify-center items-center w-10 h-10 rounded bg-red-30 right-3 absolute">
-                            <img src={buy_crypto} />
-                          </div>
-                          <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
-                            <div>
-                              <p className="font-bold text-base">
-                                Just made a sale ?
-                              </p>
-                              <div className="flex h-10">
-                                <div className="w-[80%] bg-red-80">
-                                  <p className="font-light text-red-900">
-                                    Quickly record transaction!
-                                  </p>
-                                </div>
-                                <div
-                                  onClick={() => {
-                                    setNavItems("Invoices");
-                                    setCreateNewOptions({
-                                      ...createNewOptions,
-                                      invoice: true,
-                                    });
-                                  }}
-                                  className="flex justify-center items-center w-[20%] bg-blue-40"
-                                >
-                                  <img src={logo_blue} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -1385,14 +1370,7 @@ function SideBar({ due, setDue }) {
                 <div>
                   <p className="text-xl font-bold">No Customers Created</p>
 
-                  {/* <div className="w-60 mx-auto my-3">
-                        <button
-                          onClick={() => {setNavItems("CreateNew");setCustomersNav("createCustomer")}}
-                          className="hover:bg-green-500 p-2 w-60 rounded-md text-slate-200 font-normal bg-purple-700 text-lg"
-                        >
-                          Create New Customer
-                        </button>
-                      </div> */}
+                
                 </div>
               ) : (
                 <div>
