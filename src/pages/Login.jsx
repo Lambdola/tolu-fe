@@ -38,10 +38,8 @@ function Login({ userDetails, setUserDetails }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(signInDetails),
         });
-        // alert("k")
         let data = await response.json();
         if (response.status === 200) {
-          // alert(data.message)
           localStorage.setItem("currentUser", JSON.stringify(data.message));
           setBtnState(false);
           navigate("/user/home");
@@ -51,7 +49,7 @@ function Login({ userDetails, setUserDetails }) {
           console.log(error);
         }
       } catch (error) {
-        alert("Error Signing In.\nPlease try again.");
+        alert("Error Signing In.\nConnectivity Issues.\nPlease try again.");
         setBtnState(false);
         console.log(error);
       }

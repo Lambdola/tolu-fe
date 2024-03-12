@@ -402,7 +402,6 @@ function SideBar({ due, setDue }) {
     imageUrl: "",
   });
 
-  // alert(JSON.stringify(due))
 
   const [loadingState, setLoadingState] = useState(false);
   const [createNewOptions, setCreateNewOptions] = useState({
@@ -951,11 +950,11 @@ function SideBar({ due, setDue }) {
               <div className="w-full h-full relative">
                 <div className=" bg-yellow-30 gap-5 flex xs:max-xl:flex-col">
                   {/* multi color design */}
-                  <div className="w-[25%] xs:max-xl:w-full h-96 flex flex-col rounded-md overflow-hidden bg-slate-50 shadow shadow-slate-300">
-                    <div className="bg-[#8347E7] h-36">
+                  <div className="w-[25%] xs:max-xl:w-full flex flex-col rounded-md xs:max-xl:rounded-xl overflow-hidden bg-slate-50 shadow shadow-slate-300 xs:max-xl:space-y-5">
+                    <div className="bg-[#8347E7] h-36 xs:max-xl:h-auto overflow-hidden">
                       <img
                         src={dashboard_multi}
-                        className="h-full w-full object-fit xs:max-xl:object-cover"
+                        className="h-full w-full object-fit xs:max-xl:object-cover overflow-hidden"
                       />
                     </div>
                     <div className="pt-2 px-5">
@@ -995,12 +994,11 @@ function SideBar({ due, setDue }) {
                           },
                         ].map((items) => {
                           return (
-                            <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                              <p className="font-light text-sm">
+                            <div className="w-[45%] bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                              <p className="font-medium text-sm">
                                 {items.title}
                               </p>
-                              <p className="font-bold">{items.data}</p>
-                              <p className="text-lime-400">0% </p>
+                              <p className="font-bold text-slate-500">{items.data}</p>
                             </div>
                           );
                         })}
@@ -1018,12 +1016,11 @@ function SideBar({ due, setDue }) {
                           },
                         ].map((items) => {
                           return (
-                            <div className="w-[45%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
-                              <p className="font-light text-sm">
+                            <div className="w-[45%] h- bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                              <p className="font-medium text-sm">
                                 {items.title}
                               </p>
-                              <p className="font-bold">{items.data}</p>
-                              <p className="text-lime-400">0% </p>
+                             {items.title === "Total Debt" ?  <p className="font-bold text-red-600"># {items.data?.toLocaleString("en-US")}</p> : <p className="font-bold text-slate-500">{items.data}</p> }
                             </div>
                           );
                         })}
@@ -1050,8 +1047,8 @@ function SideBar({ due, setDue }) {
                         return (
                           <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
                             <p className="font-light text-sm">{items.title}</p>
-                            <p className="font-bold">{items.data}</p>
-                            <p className="text-lime-400">0% </p>
+                            {items.title === "Total Debt" ?  <p className="font-bold text-red-600"># {items.data?.toLocaleString("en-US")}</p> : <p className="font-bold">{items.data}</p> }
+                            {/* <p className="text-lime-400">0% </p> */}
                           </div>
                         );
                       })}
