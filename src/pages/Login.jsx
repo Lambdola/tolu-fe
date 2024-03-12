@@ -231,7 +231,7 @@ function Login({ userDetails, setUserDetails }) {
                         </button>
                       )}
                        <div className="xl:hidden">
-                        <button onClick={() => setNewUser(true)} className="text-center w-full text-slate-500 font-semibold my-5">Already have an account ? <span className="text-blue-600">Sign In</span></button>
+                        <button type="button" onClick={() => setNewUser(false)} className="text-center w-full text-slate-500 font-semibold my-5">Already have an account ? <span className="text-blue-600">Sign In</span></button>
                       </div>
                     </div>
                   </div>
@@ -354,7 +354,7 @@ function Login({ userDetails, setUserDetails }) {
                         </button>
                       )}
                       <div className="xl:hidden">
-                        <button onClick={() => setNewUser(true)} className="text-center w-full text-slate-500 font-semibold my-5">Don't have an account ? <span className="text-blue-600">Create one</span></button>
+                        <button type="button" onClick={() => setNewUser(true)} className="text-center w-full text-slate-500 font-semibold my-5">Don't have an account ? <span className="text-blue-600">Create one</span></button>
                       </div>
                     </div>
                   </div>
