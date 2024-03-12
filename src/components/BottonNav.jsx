@@ -20,6 +20,7 @@ function BottonNav({ navItems, setNavItems, setNavBarState }) {
         ].map((tab) => {
           return (
             <li
+            key={tab.item}
               onClick={() => setNavItems(tab.item)}
               className={`relative flex items-end justify-center rounded-lg bg-green-40 w-10 h-10 `}
             >
