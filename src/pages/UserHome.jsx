@@ -22,6 +22,8 @@ import logo_blue from "../images/logo_blue.png";
 import BottonNav from "../components/BottonNav";
 import Transactions from "../components/Transactions";
 import Customers from "../components/Customers";
+import NewCustomer from "../components/NewCustomer";
+import Invoices from "../components/Invoices";
 
 let dotEnv = import.meta.env;
 
@@ -941,7 +943,7 @@ function SideBar({ due, setDue }) {
           </div>
         </div>
 
-{/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+        {/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
         {/* main content */}
         <div className={`relative bg-white h-full flex pt-20 justify-center`}>
           {/* dashboard route */}
@@ -994,7 +996,10 @@ function SideBar({ due, setDue }) {
                           },
                         ].map((items) => {
                           return (
-                            <div key={items.title} className="w-[45%] bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                            <div
+                              key={items.title}
+                              className="w-[45%] bg-slate-50 rounded-lg py-5 px-4 space-y-2"
+                            >
                               <p className="font-medium text-sm">
                                 {items.title}
                               </p>
@@ -1018,7 +1023,10 @@ function SideBar({ due, setDue }) {
                           },
                         ].map((items) => {
                           return (
-                            <div key={items.title} className="w-[45%] h- bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                            <div
+                              key={items.title}
+                              className="w-[45%] h- bg-slate-50 rounded-lg py-5 px-4 space-y-2"
+                            >
                               <p className="font-medium text-sm">
                                 {items.title}
                               </p>
@@ -1055,7 +1063,10 @@ function SideBar({ due, setDue }) {
                         },
                       ].map((items) => {
                         return (
-                          <div key={items.title} className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden">
+                          <div
+                            key={items.title}
+                            className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2 xs:max-xl:hidden"
+                          >
                             <p className="font-light text-sm">{items.title}</p>
                             {items.title === "Total Debt" ? (
                               <p className="font-bold text-red-600">
@@ -1095,7 +1106,10 @@ function SideBar({ due, setDue }) {
                           },
                         ].map((items) => {
                           return (
-                            <div key={items.title} className="relative w-[32%] xs:max-xl:flex xs:max-xl:items-start xs:max-xl:w-full h-[13.5rem] xs:max-xl:h-auto bg-slate-50 rounded-lg py-4 xs:max-xl:py-3">
+                            <div
+                              key={items.title}
+                              className="relative w-[32%] xs:max-xl:flex xs:max-xl:items-start xs:max-xl:w-full h-[13.5rem] xs:max-xl:h-auto bg-slate-50 rounded-lg py-4 xs:max-xl:py-3"
+                            >
                               <div className="flex justify-center items-center w-10 xs:max-xl:w-[20%] h-10 xs:max-xl:h-auto rounded bg-red-30 right-3 xs:max-xl:inset-0 absolute xs:max-xl:relative">
                                 <img
                                   src={items.icon}
@@ -1216,7 +1230,8 @@ function SideBar({ due, setDue }) {
                     {!(navRes.transaction === "") &&
                     dbItems === "Invoices" &&
                     navRes.dashboard.totalCustomers !== 0 ? (
-                      <div className="h-40 overflow-scroll">
+                      // ==================================================================================
+                      <div className="h-40 bg-red-900 overflow-scroll">
                         <div className="flex justify-between my-5 px-5">
                           <div className="w-[30%]">
                             <input
@@ -1285,7 +1300,10 @@ function SideBar({ due, setDue }) {
                         </div>
                         {navRes.transaction.map((items, index) => {
                           return (
-                            <div key={items.invoiceId} className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
+                            <div
+                              key={items.invoiceId}
+                              className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40"
+                            >
                               <div>
                                 <input type="checkbox" />
                               </div>
@@ -1350,6 +1368,7 @@ function SideBar({ due, setDue }) {
                         })}{" "}
                       </div>
                     ) : (
+                      // =======================================================================================
                       <div className="w-full h-full pt-5 flex justify-center">
                         <div className="text-center space-y-2">
                           <p className="font-semibold text-xl">
@@ -1380,9 +1399,7 @@ function SideBar({ due, setDue }) {
             </div>
           )}
 
-
-
-{/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+          {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Customers" && !newCustomer.firstName && (
             <div className="">
               {loadingState && <Loading navBarState={navBarState} />}
@@ -1391,129 +1408,35 @@ function SideBar({ due, setDue }) {
                 <div>
                   <p className="text-xl font-bold">No Customers Created</p>
                 </div>
-              ) : ( <Customers navRes={navRes} setNavItems={setNavItems} /> )}
+              ) : (
+                <Customers navRes={navRes} setNavItems={setNavItems} />
+              )}
             </div>
           )}
-{/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+          {/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Customers" && newCustomer.firstName && (
-            <div className=" bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
-              <div className="relative h-16 bg-red-300 rounded-t-lg rainbo overflow-hidden">
-                <div className="absolute top-0 -left-5 bg-emerald-400 w-[30%] h-full -skew-x-12"></div>
-                <div className="absolute top-0 left-[28%] bg-emerald-300 w-[20%] h-full -skew-x-12"></div>
-                <div className="absolute top-0 left-[48%] bg-orange-200 w-[10%] h-full -skew-x-12"></div>
-                <div className="absolute top-0 left-[55%] bg-red-400 w-full h-full -skew-x-12"></div>
-              </div>
-              <div className="h-20 rounded-b-lg bg-red-60 shadow-md shadow-slate-400">
-                <div className="absolute w-24 h-24 top-14 left-10 rounded-lg bg-white p-1">
-                  <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-lg">
-                    <img src={newCustomer.imageUrl} />
-                  </div>
-                </div>
-                <div className="ml-32 p-4 h-full bg-yellow-30 flex justify-between">
-                  <div>
-                    <p className="text-lg font-bold">
-                      {newCustomer.lastName + "   " + newCustomer.firstName}
-                    </p>
-                    <div className="flex gap-5">
-                      <div className="flex bg-red-20">
-                        <div classsName="w-10 h-10 bg-red-300"></div>
-                        <p className="text-slate-400 text-base font-semibold">
-                          {newCustomer.country}{" "}
-                        </p>
-                      </div>
-                      <div className="flex bg-red-20">
-                        <div classsName="w-5 h-5 bg-red-300"></div>
-                        <p className="text-slate-400 text-base font-semibold">
-                          {newCustomer.country}{" "}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-red-60 flex items-end">
-                    <button className="px-5 py-1 border-2 text-base font-semibold border-purple-800 rounded-lg">
-                      EDIT
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="relative mt-5">
-                <div className="absolute left-0 w-[25%] bg-red-40 top-0">
-                  <div className="py-2 px-2 rounded-lg bg-slate-100 shadow-md shadow-slate-400 space-y-2 ">
-                    <p className="monospace text-slate-400 text-sm">ABOUT</p>
-                    <div>
-                      <p className="text-slate-500 font-semibold">
-                        Full Name:{" "}
-                        {newCustomer.lastName + "   " + newCustomer.firstName}{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold">
-                        Status: ....{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold">
-                        Total Debt: ....{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="monospace text-slate-400 text-sm">
-                        CONTACTS
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold text-sm">
-                        Contacts: {newCustomer.phone}{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold text-sm">
-                        Email: {newCustomer.email}{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="monospace text-slate-400 text-sm">
-                        ADDRESS
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold text-sm">
-                        Location:{" "}
-                        {newCustomer.zipCode +
-                          ", " +
-                          newCustomer.state +
-                          ", " +
-                          newCustomer.country}{" "}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-slate-500 font-semibold">
-                        Home: {newCustomer.address}{" "}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute left-[30%] bg-red-500 h-full w-[50%]">
-                  <div className="w-full h-full bg-slate-700"></div>
-                </div>
-              </div>
-            </div>
+            <NewCustomer newCustomer={newCustomer} />
           )}
 
-{/* --------------------------------------------------------------------------------------------------------------------------------------- */}
-         
+          {/* --------------------------------------------------------------------------------------------------------------------------------------- */}
+
           {navItems === "Transactions" && (
-          <Transactions loadingState={loadingState} navRes={navRes} navBarState={navBarState} setCreateNewOptions={setCreateNewOptions} createNewOptions={createNewOptions} setNavItems={setNavItems}  />
-          // <p>ola</p>
+            <Transactions
+              loadingState={loadingState}
+              navRes={navRes}
+              navBarState={navBarState}
+              setCreateNewOptions={setCreateNewOptions}
+              createNewOptions={createNewOptions}
+              setNavItems={setNavItems}
+            />
+            // <p>ola</p>
           )}
 
-{/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+          {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
 
-          
-          {((navItems === "Transactions") &&
+          {navItems === "Transactions" &&
             createNewOptions.invoice &&
-            (navRes.customers === "")) && (
+            navRes.customers === "" && (
               <div className="bg-slate-50 absolute top-28 left-0 h-full w-full overflow-scroll p-3 flex flex-col gap-2 text-xl items-center -mt-32 font-bold justify-center">
                 <p>No customer yet.</p>
 
@@ -1533,7 +1456,7 @@ function SideBar({ due, setDue }) {
               </div>
             )}
 
-{/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+          {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Invoices" &&
             createNewOptions.invoice &&
             (navRes.customers === "" ||
@@ -1740,7 +1663,7 @@ function SideBar({ due, setDue }) {
               </div>
             )}
           {navItems === "Invoices" && !createNewOptions.invoice && (
-            <p className="">
+            <div className="">
               {loadingState && <Loading navBarState={navBarState} />}
               {navRes.transaction === "No Transaction Recorded" ||
               navRes.transaction === "" ? (
@@ -1768,191 +1691,15 @@ function SideBar({ due, setDue }) {
                   </div>
                 </div>
               ) : (
-                <p>
-                  <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
-                    {navRes.transaction.length}
-                    {/* ol */}
-                    <div className="bg-gray-100 rounded-lg shadow shadow-slate-600 overflow-scroll ">
-                      <div className="py-5 px-3 border-b border-slate-800">
-                        <p className="text-slate-700 text-xl font-semibold">
-                          Customers
-                        </p>
-                      </div>
-                      <div className="flex justify-between my-5 px-5">
-                        <div className="w-[30%]">
-                          <input
-                            type="search"
-                            className="w-full py-2 px-5 bg-transparent border-[1px] border-slate-300 rounded-md text-xl"
-                            placeholder="Search Customers"
-                          />
-                        </div>
-                        <div className="flex gap-5">
-                          <div>
-                            <button
-                              onClick={() =>
-                                setCreateNewOptions({
-                                  ...createNewOptions,
-                                  invoice: true,
-                                })
-                              }
-                              className="hover:bg-green-500 p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 text-lg"
-                            >
-                              Create Invoice
-                            </button>
-                          </div>
-                          <div>
-                            <button className="p-2 w-40 rounded-md text-slate-200 font-normal bg-transparent border border-purple-900 text-lg flex justify-between items-center">
-                              <p className="text-black text-xl">Actions</p>
-                              <div className="w-5 h-5 bg-red-200"></div>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
-                        <div>
-                          <input type="checkbox" />
-                        </div>
-                        <div className="bg-red-20 w-[14%]">
-                          <p className="border-r border-slate-400 px-5 ">#ID</p>
-                        </div>
-                        <div className="bg-red-20 w-[25%] ">
-                          <p className="border-r border-slate-400 px-5 ">
-                            CUSTOMER
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[10%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            TOTAL
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[15%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            ISSUED DATE
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[15%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            BALANCE
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[10%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            ACTION
-                          </p>
-                        </div>
-                      </div>
-                      <div className="h-80 overflow-scroll">
-                        {navRes.transaction.map((items, index) => {
-                          return (
-                            <div className="border-b-[1px] border-slate-300 px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
-                              {showInvoice && (
-                                <div
-                                  onClick={() => setShowInvoice(false)}
-                                  className="absolute flex items-center justify-center bg-red-200 left-0 h-full w-full"
-                                >
-                                  <div>
-                                    <div classNmae="flex justify-between bg-red-800">
-                                      <div>
-                                        <p>
-                                          Seller Name:{" "}
-                                          {
-                                            JSON.parse(items.seller)
-                                              .businessName
-                                          }{" "}
-                                        </p>
-                                        <p>
-                                          Seller Mail:{" "}
-                                          {JSON.parse(items.seller).email}{" "}
-                                        </p>
-                                      </div>
-                                      <div>
-                                        <p>Invoice No: {items.invoiceId} </p>
-                                        <p>Date Issues: {items.dateIssued}</p>
-                                        <p>Date Due: {items.duePayDate} </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                              <div>
-                                <input type="checkbox" />
-                              </div>
-                              <div className="bg-red-20  w-[14%]">
-                                {/* <div className="w-5 h-5 rounded-full bg-red-400"></div> */}
-                                <p className="border- border-slate-400 px-5 ">
-                                  {items.invoiceId}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[25%] flex items-center justify-start pl-2">
-                                <div className="w-5 h-5 rounded-full bg-red-900"></div>
-                                <div className="border- border-slate-400 pl-2 flex justify-center flex-col w-[70%]">
-                                  <p>{items.customer}</p>
-                                  <p className=" bg-red-20">
-                                    {/* {JSON.parse(items.customer).email}{" "} */}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="bg-red-20 w-[10%] pl-3">
-                                <div className="">
-                                  <p className="font-mono text-red-60 text-lg">
-                                    # {items.amountTotal}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="bg-red-20 w-[15%] ml-2 pl-5">
-                                <p className="border- border-slate-400 truncate text-ellipsis text-base ">
-                                  {items.dateIssued
-                                    .split("-")
-                                    .reverse()
-                                    .join("-")}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[15%] ml-3">
-                                <div className="border- border-slate-400 px-5">
-                                  {items.paidStatus === "paid" ? (
-                                    <span className="px-2 text-center py-1 bg-lime-200 text-green-500 text-sm rounded">
-                                      {items.paidStatus}
-                                    </span>
-                                  ) : (
-                                    <div className="flex items-center gap-3">
-                                      <p className="font-mono text-red-600 text-lg">
-                                        {items.debt}
-                                      </p>
-                                      <div
-                                        onClick={() => {
-                                          window.location.href = `${items.paymentLink}`;
-                                        }}
-                                      >
-                                        <OpenInNewIcon className="text-blue-600" />
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="bg-red-20 w-[10%]">
-                                <div className="h-full flex  bg-blue-60 justify-between">
-                                  <div className="h-full w-full flex bg-blue-60 px-1 justify-between">
-                                    <div>
-                                      <DeleteOutlineIcon />
-                                    </div>
-                                    <div onClick={() => setShowInvoice(true)}>
-                                      <RemoveRedEyeOutlinedIcon />
-                                    </div>
-                                    <div>
-                                      <MoreVertOutlinedIcon />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </p>
+                <Invoices
+                  setCreateNewOptions={setCreateNewOptions}
+                  createNewOptions={createNewOptions}
+                  navRes={navRes}
+                  showInvoice={showInvoice}
+                  setShowInvoice={setShowInvoice}
+                />
               )}
-            </p>
+            </div>
           )}
           {navItems === "CreateNew" && customersNav === "createCustomer" && (
             <div className="bg-blue-40 absolute top-0 left-0 h-full w-full z-50 p-3">

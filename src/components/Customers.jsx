@@ -6,10 +6,10 @@ function Customers({ navRes, setNavItems }) {
     <div>
       <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3 xs:max-xl:p-0">
         <div className="bg-gray-100  xs:max-xl:bg-white rounded-lg shadow shadow-slate-600  xs:max-xl:shadow-transparent overflow-scroll ">
-          <div className="py-5 px-3 border-b border-slate-800 xs:max-xl:border-slate-300 xs:max-xl:fixed xs:max-xl:w-full">
+          <div className="py-5 px-3 border-b border-slate-800 xs:max-xl:border-slate-300 xs:max-xl:absolute xs:max-xl:w-full">
             <p className="text-slate-700 text-xl font-semibold">Customers</p>
           </div>
-          <div className="flex xs:max-xl:bg-white bg-red-40 justify-between my-5 px-5 xs:max-xl:fixed xs:max-xl:mt-24">
+          <div className="flex xs:max-xl:bg-white bg-red-40 justify-between my-5 px-5 xs:max-xl:absolute xs:max-xl:mt-24">
           <div className="w-[30%] xs:max-xl:w-10 bg-red-30 flex items-center justify-center">
               <input
                 type="search"
