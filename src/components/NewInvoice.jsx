@@ -31,7 +31,7 @@ function NewInvoice({
             </div>
             <div className="w-[45%] xs:max-xl:w-full space-y-3 xs:max-xl:space-y-3 bg-red-30">
               <div className="flex justify-evenly xs:max-xl:justify-start">
-                <p className="font-light text-slate-700 w-[40%] xs:max-xl:w-1/3 xs:max-xl:text-left text-right">
+                <p className="font-light text-slate-700 xs:max-xl:text-slate-900 xs:max-xl:font-normal w-[40%] xs:max-xl:w-1/3 xs:max-xl:text-left text-right">
                   Date Issued:
                 </p>
                 <div className="relative w-32 p-4 bg-red-20 rounded-md">
@@ -39,12 +39,12 @@ function NewInvoice({
                     type="date"
                     name="dateIssue"
                     id="dateIssue"
-                    className="top-0 left-0 absolute w-full h-full p-2 bg-transparent border border-slate-400"
+                    className="top-0 left-0 absolute w-full h-full p-2 bg-transparent border border-slate-400 xs:max-xl:border-slate-200"
                   />
                 </div>
               </div>
               <div className="flex justify-evenly xs:max-xl:justify-start">
-              <p className="font-light text-slate-700 w-[40%] xs:max-xl:w-1/3 xs:max-xl:text-left text-right">
+              <p className="font-light text-slate-700 xs:max-xl:text-slate-900 xs:max-xl:font-normal w-[40%] xs:max-xl:w-1/3 xs:max-xl:text-left text-right">
                   Date Due:
                 </p>
                 <div className="relative w-32 p-4 bg-red-20 rounded-md">
@@ -52,7 +52,7 @@ function NewInvoice({
                     type="date"
                     name="dateDue"
                     id="dateDue"
-                    className="top-0 left-0 absolute w-full h-full p-2 bg-transparent border border-slate-400"
+                    className="top-0 left-0 absolute w-full h-full p-2 bg-transparent border border-slate-400 xs:max-xl:border-slate-200"
                   />
                 </div>
               </div>
@@ -60,13 +60,13 @@ function NewInvoice({
           </div>
 
           <div className="flex justify-between items-center">
-            <div className="w-full px-5">
-              <p className="text-lg font-semibold my-1">Invoice To:</p>
+            <div className="w-full px-5 xs:max-xl:px-2 bg-red-40">
+              <p className="text-lg font-semibold xs:max-xl:font-bold my-1">Invoice To:</p>
               <select
                 required
                 id="selectCustomer"
                 name="selectCustomer"
-                className="p-2 w-full my-2 text-lg"
+                className="p-2 w-full my-2 xs:max-xl:my-0 text-lg"
               >
                 <option selected disabled>
                   Select
@@ -86,7 +86,7 @@ function NewInvoice({
                     );
                   })}
               </select>
-              <span>Amount Paid: </span>
+              <span className="xs:max-xl:block xs:max-xl:mt-5 xs:max-xl:font-bold">Amount Paid: </span>
               <input
                 id="paidStatus"
                 name="paidStatus"
@@ -96,7 +96,7 @@ function NewInvoice({
             </div>
           </div>
 
-          <div className="m-3 border-[1px] border-slate-400 p-2 rounded-md ">
+          <div className="m-3 border-[1px] border-slate-400 xs:max-xl:border-transparent p-2 rounded-md ">
             {product.length >= 1 && (
               <div>
                 <div className="flex justify-between px-5 py-2 text-sm border-b border-slate-400">
@@ -119,14 +119,14 @@ function NewInvoice({
 
           <div>
             <div className="">
-              <div className="flex justify-between px-5">
+              <div className="flex justify-between px-5 xs:max-xl:px-1">
                 <p className="w-[40%]">Item</p>
-                <p className="w-[20%]">Unit Price</p>
+                <p className="w-[20%] xs:max-xl:w-[40%]">Unit Price</p>
                 <p className="w-[20%]">Quantity</p>
               </div>
               <form
                 onSubmit={handleAddItem}
-                className="flex flex-wrap justify-between p-5 mx-5 borde-[1px] border-slate-400 rounded-md bg-transparent"
+                className="flex flex-wrap justify-between p-5 mx-5 xs:max-xl:p-0 xs:max-xl:mx-0 bg-red-400 borde-[1px] border-slate-400 rounded-md bg-transparent"
               >
                 <input
                   name="itemName"
@@ -149,7 +149,7 @@ function NewInvoice({
                       [e.target.name]: e.target.value,
                     })
                   }
-                  className="w-[20%] py-1 px-2 border-[1px] border-slate-400 rounded-md bg-transparent"
+                  className="w-[20%] xs:max-xl:w-[40%] py-1 px-2 border-[1px] border-slate-400 rounded-md bg-transparent"
                   placeholder="Item price"
                 />
                 <input
@@ -168,7 +168,7 @@ function NewInvoice({
                 <div className="w-full text-right">
                   <button
                     type="submit"
-                    className="hover:bg-green-500 p-1 my-2 w-28 rounded text-slate-200 font-normal bg-purple-700 text-lg"
+                    className="hover:bg-green-500 p-1 my-2 w-28 rounded text-slate-200 font-normal bg-green-700 text-lg"
                   >
                     Add Item
                   </button>
