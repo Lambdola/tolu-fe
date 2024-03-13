@@ -21,6 +21,7 @@ import buy_crypto from "../images/buy_crypto.png";
 import logo_blue from "../images/logo_blue.png";
 import BottonNav from "../components/BottonNav";
 import Transactions from "../components/Transactions";
+import Customers from "../components/Customers";
 
 let dotEnv = import.meta.env;
 
@@ -940,6 +941,7 @@ function SideBar({ due, setDue }) {
           </div>
         </div>
 
+{/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
         {/* main content */}
         <div className={`relative bg-white h-full flex pt-20 justify-center`}>
           {/* dashboard route */}
@@ -1377,6 +1379,10 @@ function SideBar({ due, setDue }) {
               </div>
             </div>
           )}
+
+
+
+{/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Customers" && !newCustomer.firstName && (
             <div className="">
               {loadingState && <Loading navBarState={navBarState} />}
@@ -1385,136 +1391,10 @@ function SideBar({ due, setDue }) {
                 <div>
                   <p className="text-xl font-bold">No Customers Created</p>
                 </div>
-              ) : (
-                <div>
-                  <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
-                    {navRes.customers.length}
-                    {/* ol */}
-                    <div className="bg-gray-100 rounded-lg shadow shadow-slate-600 overflow-scroll ">
-                      <div className="py-5 px-3 border-b border-slate-800">
-                        <p className="text-slate-700 text-xl font-semibold">
-                          Customers
-                        </p>
-                      </div>
-                      <div className="flex justify-between my-5 px-5">
-                        <div className="w-[30%]">
-                          <input
-                            type="search"
-                            className="w-full py-2 px-5 bg-transparent border-[1px] border-slate-300 rounded-md text-xl"
-                            placeholder="Search Customers"
-                          />
-                        </div>
-                        <div className="flex gap-5">
-                          <div>
-                            <button
-                              onClick={() => setNavItems("CreateNew")}
-                              className="p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 hover:bg-green-600 active:bg-green-800 text-lg"
-                            >
-                              Create Customer
-                            </button>
-                          </div>
-                          <div>
-                            <button className="p-2 w-40 rounded-md text-slate-200 font-normal bg-transparent border border-purple-900 text-lg flex justify-between items-center">
-                              <p className="text-black text-xl">Actions</p>
-                              <div className="w-5 h-5 bg-red-200"></div>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
-                        <div>
-                          <input type="checkbox" />
-                        </div>
-                        <div className="bg-red-20 w-[16%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            CUSTOMERS
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[16%] ">
-                          <p className="border-r border-slate-400 px-5 ">
-                            PHONE
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[16%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            EMAIL
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[20%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            ADDRESS
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[16%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            TOTAL DEBT
-                          </p>
-                        </div>
-                        <div className="bg-red-20 w-[10%]">
-                          <p className="border-r border-slate-400 px-5 ">
-                            ACTIONS
-                          </p>
-                        </div>
-                      </div>
-                      <div className="h-80 overflow-scroll">
-                        {navRes.customers.map((items, index) => {
-                          return (
-                            <div className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40 border-b-[1px]  border-slate-300">
-                              <div>
-                                <input type="checkbox" />
-                              </div>
-                              <div className="bg-red-20 w-[16%] flex items-center justify-center ml-5">
-                                <div className="w-[20%] flex items-center justify-center">
-                                  <div className="w-5 h-5 rounded-full bg-red-400 flex items-center justify-center overflow-hidden">
-                                    <img
-                                      src={items.imageUrl}
-                                      className="w-full h-full"
-                                    />
-                                  </div>
-                                </div>
-
-                                <p className="w-[80%] border-slate-400 pl-1 truncate text-ellipsis ">
-                                  {items.firstName + " " + items.lastName}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[16%] ">
-                                <p className="border- border-slate-400 ">
-                                  {items.phone}{" "}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[16%]">
-                                <p className="border- border-slate-400 truncate text-ellipsis ">
-                                  {items.email}{" "}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[20%]">
-                                <p className="border- border-slate-400 px-2 truncate text-ellipsis ">
-                                  {items.address}{" "}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[16%]">
-                                <p className="border- border-slate-400 px-5 flex gap-1 ">
-                                  # {items.debt ? <p>{items.debt}</p> : 0}
-                                </p>
-                              </div>
-                              <div className="bg-red-20 w-[10%]">
-                                <div className="h-full w-full flex justify-start bg-blue-00 ml-5">
-                                  <div>
-                                    <MoreVertOutlinedIcon />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              ) : ( <Customers navRes={navRes} setNavItems={setNavItems} /> )}
             </div>
           )}
-
+{/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Customers" && newCustomer.firstName && (
             <div className=" bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
               <div className="relative h-16 bg-red-300 rounded-t-lg rainbo overflow-hidden">
@@ -1629,9 +1509,11 @@ function SideBar({ due, setDue }) {
           )}
 
 {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
-          {navItems === "Transactions" &&
+
+          
+          {((navItems === "Transactions") &&
             createNewOptions.invoice &&
-            navRes.customers === "" && (
+            (navRes.customers === "")) && (
               <div className="bg-slate-50 absolute top-28 left-0 h-full w-full overflow-scroll p-3 flex flex-col gap-2 text-xl items-center -mt-32 font-bold justify-center">
                 <p>No customer yet.</p>
 
@@ -1650,6 +1532,8 @@ function SideBar({ due, setDue }) {
                 </button>
               </div>
             )}
+
+{/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {navItems === "Invoices" &&
             createNewOptions.invoice &&
             (navRes.customers === "" ||
@@ -1670,7 +1554,7 @@ function SideBar({ due, setDue }) {
                         </div>
                         <p className="font-light text-slate-600">
                           (903) 545-2453 11953 County Rd #247 Oakwood,
-                          Texas(TX), 75855
+                          Texas(TX), 75855l
                         </p>
                       </div>
                       <div className="w-[45%] space-y-3 bg-red-30">
