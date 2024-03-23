@@ -969,14 +969,14 @@ function SideBar({ due, setDue }) {
                       </p>
                     </div>
                     <div className="py-4 px-5">
-                      <div className="float-right w-1/2">
+                      <div className="float-right w-1/2 xs:max-xl:w-auto">
                         <button
                           onClick={() => {
                             setNavItems("CreateNew");
                           }}
-                          className="p-2 bg-[#8347E7] w-full text-slate-200 font-light"
+                          className="p-2 bg-[#8347E7] w-full text-slate-200 font-light xs:max-xl:text-sm xs:max-xl:rounded-md"
                         >
-                          Create New
+                          Create New Customer
                         </button>
                       </div>
                     </div>

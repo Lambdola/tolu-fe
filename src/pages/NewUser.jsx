@@ -6,6 +6,7 @@ let dotEnv = import.meta.env
 
 function NewUser({ userDetails, setUserDetails }) {
   const [introPage, setIntroPage] = useState(true);
+  const [btnState, setBtnState] = useState(false)
 
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function NewUser({ userDetails, setUserDetails }) {
   }
 
   async function handleNext(param) {
-    console.log(param)
+    setBtnState(true)
           try {
             let url = baseUrl + "/itrack/create-user";
             // alert(url);
@@ -43,6 +44,7 @@ function NewUser({ userDetails, setUserDetails }) {
             alert("Error Creating User");
             navigate("/log-in");
           }
+          setBtnState(false)
          
        
       }
@@ -298,7 +300,8 @@ function NewUser({ userDetails, setUserDetails }) {
                       <div>
                         <button
                            onClick={() => handleNext("skip")}
-                          className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg hover:bg-transparent hover:text-purple-600 hover:font-medium"
+                           disabled={btnState}
+                          className={`p-2 text-center w-full ${btnState ? "bg-white text-slate-300" : "bg-purple-600 text-white" }   text-lg rounded-lg hover:bg-transparent hover:text-purple-600 hover:font-medium`}
                         >
                           Continue
                         </button>
