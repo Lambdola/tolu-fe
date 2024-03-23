@@ -98,6 +98,7 @@ function Login({ userDetails, setUserDetails }) {
                       </label>
                       <input
                         required
+                        spellCheck={false}
                         id="firstName"
                         name="firstName"
                         type="text"
@@ -121,6 +122,7 @@ function Login({ userDetails, setUserDetails }) {
                       </label>
                       <input
                         required
+                        spellCheck={false}
                         id="lastName"
                         name="lastName"
                         type="text"
@@ -146,6 +148,7 @@ function Login({ userDetails, setUserDetails }) {
                       </label>
                       <input
                         required
+                        spellCheck={false}
                         id="email"
                         name="email"
                         type="email"
@@ -156,13 +159,13 @@ function Login({ userDetails, setUserDetails }) {
                             [e.target.name]: e.target.value,
                           })
                         }
-                        className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
+                        className="w-full xs:max-xl:max-w-[400px] p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Your Email"
                       />
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <div className="relative w-full">
+                    <div className="relative w-full xs:max-xl:max-w-[400px]">
                       <div className="absolute right-5 top-4">
                         <div
                           onClick={(e) => {
@@ -182,6 +185,7 @@ function Login({ userDetails, setUserDetails }) {
                       </label>
                       <input
                         required
+                        spellCheck={false}
                         id="password"
                         name="password"
                         type={showPassword ? "text" : "password"}
@@ -192,7 +196,7 @@ function Login({ userDetails, setUserDetails }) {
                             [e.target.name]: e.target.value,
                           })
                         }
-                        className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg xs:max-xl:placeholder:text-transparent"
+                        className="w-full xs:max-xl:max-w-[400px] p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg xs:max-xl:placeholder:text-transparent"
                         placeholder="Password (Minimum of 8 characters)"
                       />
                     </div>
@@ -201,6 +205,7 @@ function Login({ userDetails, setUserDetails }) {
                     <div className="my-5 flex gap-4 items-center">
                       <input
                         type="checkbox"
+                        
                         onChange={() => setChecked(!checked)}
                         className="w-4 h-4"
                       />
@@ -217,12 +222,12 @@ function Login({ userDetails, setUserDetails }) {
                     </div>
                     <div>
                       {checked ? (
-                        <button className="hover:bg-green-600 active:bg-green-800 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
+                        <button className="hover:bg-green-600 active:bg-green-800 p-2 h-10 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                           Get Started!
                         </button>
                       ) : (
                         <button
-                          className="p-2 text-center text-slate-100 w-full bg-gray-200 rounded-lg"
+                          className="p-2 h-10 text-center text-slate-100 w-full bg-gray-200 rounded-lg"
                           disabled
                         >
                           Get Started!
@@ -274,7 +279,7 @@ function Login({ userDetails, setUserDetails }) {
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <div className="relative w-full">
+                    <div className="relative w-full xs:max-xl:max-w-[400px]">
                       <div className="absolute right-5 top-4">
                         <div
                           onClick={(e) => {

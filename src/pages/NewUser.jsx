@@ -51,7 +51,7 @@ function NewUser({ userDetails, setUserDetails }) {
     <div>
       {introPage ? (
         <div className="fixed top-0 left-0 flex h-full w-full bg-slate-100 items-center justify-center">
-          <div className="w-1/3 h-60 mx-auto bg-blue-30">
+          <div className="w-1/3 xs:max-xl:w-full h-60 xs:max-xl:h-auto mx-auto bg-blue-30">
             <div className="w-[90%] mx-auto p-5 bg-slate-50 rounded-lg shadow shadow-slate-300 space-y-3">
               <div className="flex justify-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-purple-80 flex items-center justify-center">
@@ -61,18 +61,18 @@ function NewUser({ userDetails, setUserDetails }) {
               </div>
               <p className="font-semibold text-center">
                 Before you continue, we'd like to know how you intend to use
-                iTrack
+                iTrack.
               </p>
               <p className="font-light text-slate-800 text-center">
                 We'll use that information to personalize the App so you can
                 have a more seamless experience! You can decide to skip and
-                continue with this step later
+                continue with this step later.
               </p>
               <div className="flex justify-between">
                 <div className="w-[48%]">
                   <button
                     onClick={() => handleNext("skip")}
-                    className="p-1 w-full text-center bg- rounded-md border border-slate-500"
+                    className="p-1 w-full text-center bg- rounded-md border border-slate-500 hover:border-white hover:text-red-500 "
                   >
                     Skip
                   </button>
@@ -80,7 +80,7 @@ function NewUser({ userDetails, setUserDetails }) {
                 <div className="w-[48%]">
                   <button
                     onClick={() => setIntroPage(false)}
-                    className="p-1 w-full text-center bg-purple-600 text-slate-100 rounded-md border"
+                    className="p-1 w-full text-center bg-purple-600 text-slate-100 rounded-md border hover:bg-white hover:text-purple-600"
                   >
                     Continue
                   </button>
@@ -90,9 +90,9 @@ function NewUser({ userDetails, setUserDetails }) {
           </div>
         </div>
       ) : (
-        <div className="fixed top-0 right-0 left-0 bg-slate-50 w-full h-full">
+        <div className="fixed xs:max-xl:overflow-scroll top-0 right-0 left-0 bg-slate-50 w-full h-full">
           <div className="flex">
-            <div className="w-2/3 p-10 bg-yellow-40">
+            <div className="w-2/3 xs:max-xl:w-full p-10 xs:max-xl:p-5 bg-yellow-40">
               <div className="flex gap-5 items-center">
                 <p className="font-semibold text-slate-700 text-xl">
                   <button onClick={() => navigate("/")}>
@@ -125,6 +125,7 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="businessName"
                           name="businessName"
                           type="text"
@@ -150,6 +151,7 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="country"
                           name="country"
                           type="text"
@@ -173,6 +175,7 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="state"
                           name="state"
                           type="text"
@@ -196,8 +199,9 @@ function NewUser({ userDetails, setUserDetails }) {
                         >
                           Address
                         </label>
-                        <input
+                        <textarea
                           required
+                          spellCheck={false}
                           id="address"
                           name="address"
                           type="text"
@@ -223,6 +227,7 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="currency"
                           name="currency"
                           type="text"
@@ -238,8 +243,8 @@ function NewUser({ userDetails, setUserDetails }) {
                         />
                       </div>
                     </div>
-                    <div className="flex justify-between">
-                      <div className="relative w-[48%]">
+                    <div className="flex flex-wrap xs:max-xl:gap-5 justify-between">
+                      <div className="relative w-[48%] xs:max-xl:w-full">
                         <label
                           htmlFor="businessPhone"
                           className="absolute bg-slate-50 px-2 ml-3 py-1 text-sm -top-3"
@@ -248,9 +253,11 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="businessPhone"
                           name="businessPhone"
                           type="text"
+                          maxLength={11}
                           value={userDetails.businessPhone}
                           onChange={(e) =>
                             setUserDetails({
@@ -262,7 +269,7 @@ function NewUser({ userDetails, setUserDetails }) {
                           placeholder="Enter Business phone"
                         />
                       </div>
-                      <div className="relative w-[48%]">
+                      <div className="relative w-[48%] xs:max-xl:w-full">
                         <label
                           htmlFor="businessEmail"
                           className="absolute bg-slate-50 px-2 ml-3 py-1 text-sm -top-3"
@@ -271,6 +278,7 @@ function NewUser({ userDetails, setUserDetails }) {
                         </label>
                         <input
                           required
+                          spellCheck={false}
                           id="businessEmail"
                           name="businessEmail"
                           type="email"
@@ -290,7 +298,7 @@ function NewUser({ userDetails, setUserDetails }) {
                       <div>
                         <button
                            onClick={() => handleNext("skip")}
-                          className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg"
+                          className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg hover:bg-transparent hover:text-purple-600 hover:font-medium"
                         >
                           Continue
                         </button>
@@ -301,7 +309,7 @@ function NewUser({ userDetails, setUserDetails }) {
               </div>
             </div>
 
-            <div className="fixed right-0 h-full w-1/3 bg-purple-200 p-10">
+            <div className="xs:max-xl:hidden fixed right-0 h-full w-1/3 bg-purple-200 p-10">
               <p className="font-bold text-right text-red-500 underline">
                 <button className="">Log out</button>
               </p>
