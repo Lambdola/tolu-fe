@@ -1,7 +1,35 @@
 import MoreVertOutlined from "@mui/icons-material/MoreVertOutlined";
-import React from "react";
+import React, { useEffect } from "react";
+import baseUrl from "../helpers/getEnvironment";
+import postHook from "../fetchHooks/postHook";
 
-function Customers({ navRes, setNavItems }) {
+function Customers({
+  navRes,
+  setNavItems,
+  setNewCustomer,
+  setLoadingState,
+  setNavRes,
+}) {
+  useEffect(() => {
+    async function customersData() {
+      setNewCustomer("");
+      try {
+        let url = baseUrl + "/itrack/customers";
+        let response = await postHook(url, { sellerEmail: user.email });
+        alert(JSON.stringify(response))
+        if (response.sucess) {
+          setNavRes({ ...navRes, customers: response.sucess });
+        } else {
+          setNavRes({ ...navRes, customers: "" });
+        }
+      } catch (error) {
+        setNavRes({ ...navRes, customers: "" });
+      } finally {
+        setLoadingState(false);
+      }
+    }
+    customersData()
+  }, []);
   return (
     <div>
       <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3 xs:max-xl:p-0">
@@ -10,7 +38,7 @@ function Customers({ navRes, setNavItems }) {
             <p className="text-slate-700 text-xl font-semibold">Customers</p>
           </div>
           <div className="flex xs:max-xl:bg-white bg-red-40 justify-between my-5 px-5 xs:max-xl:absolute xs:max-xl:mt-24">
-          <div className="w-[30%] xs:max-xl:w-10 bg-red-30 flex items-center justify-center">
+            <div className="w-[30%] xs:max-xl:w-10 bg-red-30 flex items-center justify-center">
               <input
                 type="search"
                 className="xs:max-xl:hidden w-full py-2 px-5 bg-transparent border-[1px] border-slate-300 rounded-md text-xl"
@@ -27,12 +55,14 @@ function Customers({ navRes, setNavItems }) {
                   Create Customer
                 </button>
               </div>
-              <div> 
-                  <button className="p-2 w-40  xs:max-xl:w-28 rounded-md text-slate-200 font-normal bg-transparent border border-purple-900 xs:max-xl:border-slate-500 text-lg flex justify-between items-center">
-                    <p className="text-black text-xl  xs:max-xl:text-sm">Actions</p>
-                    <div className="w-5 h-5 bg-red-200  xs:max-xl:w-3  xs:max-xl:h-3"></div>
-                  </button>
-                </div>
+              <div>
+                <button className="p-2 w-40  xs:max-xl:w-28 rounded-md text-slate-200 font-normal bg-transparent border border-purple-900 xs:max-xl:border-slate-500 text-lg flex justify-between items-center">
+                  <p className="text-black text-xl  xs:max-xl:text-sm">
+                    Actions
+                  </p>
+                  <div className="w-5 h-5 bg-red-200  xs:max-xl:w-3  xs:max-xl:h-3"></div>
+                </button>
+              </div>
             </div>
           </div>
           {/* =========================== */}
@@ -41,22 +71,34 @@ function Customers({ navRes, setNavItems }) {
               <input type="checkbox" />
             </div>
             <div className="bg-red-20 w-[16%] xs:max-xl:min-w-[10rem]">
-              <p className="border-r border-slate-400 px-5  xs:max-xl:pl-5 ">CUSTOMERS</p>
+              <p className="border-r border-slate-400 px-5  xs:max-xl:pl-5 ">
+                CUSTOMERS
+              </p>
             </div>
             <div className="bg-red-20 w-[16%]  xs:max-xl:min-w-[8rem]">
-              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">PHONE</p>
+              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">
+                PHONE
+              </p>
             </div>
             <div className="bg-red-20 w-[16%]  xs:max-xl:min-w-[10rem]">
-              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">EMAIL</p>
+              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">
+                EMAIL
+              </p>
             </div>
             <div className="bg-red-20 w-[20%]  xs:max-xl:min-w-[8rem]">
-              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5 ">ADDRESS</p>
+              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5 ">
+                ADDRESS
+              </p>
             </div>
             <div className="bg-red-20 w-[16%]  xs:max-xl:min-w-[8rem]">
-              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">TOTAL DEBT</p>
+              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5">
+                TOTAL DEBT
+              </p>
             </div>
             <div className="bg-red-20 w-[10%]  xs:max-xl:min-w-[8rem]">
-              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5 ">ACTIONS</p>
+              <p className="border-r border-slate-400 px-5 xs:max-xl:pl-5 ">
+                ACTIONS
+              </p>
             </div>
           </div>
           <div className="">
