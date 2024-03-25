@@ -444,6 +444,7 @@ function SideBar({ due, setDue }) {
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
     <div className="overflow-scroll">
+      {/* for desktop view */}
       <div className="xs:max-xl:hidden">
         {navBarState === "expand" ? (
           <ExpandSideBar
@@ -465,6 +466,7 @@ function SideBar({ due, setDue }) {
           />
         )}
       </div>
+      {/* for mobile view */}
       <div className="xl:hidden">
         <BottonNav
           navItems={navItems}
@@ -543,7 +545,7 @@ function SideBar({ due, setDue }) {
                         <div>
                           <p classNme="text-red-600">Unpaid Invoices</p>
                           <p className=" text-red-600 text-[15px]">
-                            You still have unpaid invoices for {item.customer}
+                            You still have unpaid invoices for {item.customer} 
                           </p>
                         </div>
                       </div>
