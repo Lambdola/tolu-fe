@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function NewInvoice({
   navRes,
@@ -12,6 +12,8 @@ function NewInvoice({
   setCreateNewOptions,
   createNewOptions,
 }) {
+  useEffect(() => {
+  })
   return (
     <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-auto p-3">
       <div className="relative w-full h-full overflow-auto">

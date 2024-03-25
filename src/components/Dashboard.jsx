@@ -40,14 +40,14 @@ function Dashboard({ setNavItems, setNavRes, navRes, setDbItems, dbItems }) {
   // }, []);
 
   return (
-    <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-40 p-3">
+    <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scrol z-40 p-3">
       <div className="w-full h-full relative">
-        <div className=" bg-yellow-300 gap-5 flex xs:max-xl:flex-col">
+        <div className=" bg-yellow-30 gap-5 flex xs:max-xl:flex-col">
           <div className="w-[30%] xs:max-xl:w-full">
             <Welcome setNavItems={setNavItems} />
           </div>
 
-          <div className="w-[70%] h-full xs:max-xl:w-full bg-red-300">
+          <div className="w-[70%] h-full xs:max-xl:w-full bg-red-30">
             <Analytics analytics={analytics} />
             <QuickActions />
           </div>

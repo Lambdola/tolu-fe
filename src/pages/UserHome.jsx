@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import customer_created from "../images/customer_created.png";
+
+
 import BottonNav from "../components/BottonNav";
 import Transactions from "../components/Transactions";
 import Customers from "../components/Customers";
@@ -14,6 +14,7 @@ import CollapseSideBar from "../components/CollapseSideBar";
 import ExpandSideBar from "../components/ExpandSideBar";
 import postHook from "../fetchHooks/postHook";
 import Notifications from "../components/Notifications";
+import NewCustomerAlert from "../components/NewCustomerAlert";
 
 let dotEnv = import.meta.env;
 
@@ -240,7 +241,7 @@ function SideBar({ due, setDue }) {
   async function getResponse(param) {
     setNewCustomer("");
     setCreateNewOptions({ ...createNewOptions, invoice: false });
-    setLoadingState(true);
+    // setLoadingState(true);
     let response, data;
     // if (param === "Dashboard") {
     //   try {
@@ -445,7 +446,7 @@ function SideBar({ due, setDue }) {
   }
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
-    <div className="overflow-auto">
+    <div className="overflow-aut">
       {/* for desktop view */}
       <div className="xs:max-xl:hidden">
         {navBarState === "expand" ? (
@@ -478,7 +479,7 @@ function SideBar({ due, setDue }) {
       </div>
 
       <div
-        className={` fixed z-10 h-full overflow-auto right-0 top-0 ${
+        className={` fixed xs:max-xl:relative bg-red-40 z-10 h-full xs:max-xl:h-screen overflow-auto right-0 top-0 ${
           navBarState === "expand"
             ? "left-[20%] bg-green-40 xs:max-xl:left-0"
             : "left-[5%] bg-yellow-40 xs:max-xl:left-0"
@@ -508,24 +509,14 @@ function SideBar({ due, setDue }) {
 
           <div className="relative flex xs:max-xl:hidden items-center gap-3 justify-end bg-red-40 w-[35%]">
             {newCustomer && (
-              <div className=" flex items-center justify-evenly absolute w-full h-14 rounded-lg z-50 bg-slate-50 shadow shadow-slate-400 top-10 right-80">
-                <div className="w-[15%] bg-red-30 flex items-center justify-center">
-                  <div className="w-2/3 h-1/2">
-                    <img src={customer_created} />
-                  </div>
-                </div>
-                <div className="w-[85%] bg-red-30 text-green-500">
-                  <p className="text-[15px] font-bold">Customer created</p>
-                  <p className="text-[11px]">
-                    A new customer "
-                    {newCustomer.firstName + " " + newCustomer.lastName}" has
-                    been created{" "}
-                  </p>
-                </div>
-              </div>
+             <NewCustomerAlert newCustomer={newCustomer} />
             )}
 
-<Notifications setShowDues={setShowDues} showDues={showDues} due={due} />
+            <Notifications
+              setShowDues={setShowDues}
+              showDues={showDues}
+              due={due}
+            />
 
             <div className="relative w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center">
               <div className="absolute -bottom-0 -right-1 w-5 h-5 p-1 rounded-full bg-slate-100">
@@ -555,27 +546,29 @@ function SideBar({ due, setDue }) {
 
         {/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
         {/* main content */}
-        <div className={`relative bg-white h-full flex pt-20 justify-center`}>
+        <div className={`relative bg-white h-full flex pt-0 justify-center`}>
           {/* dashboard route */}
           {navItems === "Dashboard" && (
-             <Dashboard setNavItems={setNavItems} setNavRes={setNavRes} navRes={navRes} setDbItems={setDbItems} dbItems={dbItems} />
+            <Dashboard
+              setNavItems={setNavItems}
+              setNavRes={setNavRes}
+              navRes={navRes}
+              setDbItems={setDbItems}
+              dbItems={dbItems}
+            />
           )}
 
           {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {/* customers route */}
-          {navItems === "Customers" && !newCustomer.firstName && (
-            <div className="">
-              {loadingState && <Loading navBarState={navBarState} />}
-              {navRes.customers === "No Customers Created" ||
-              navRes.customers === "" ? (
-                <div>
-                  <p className="text-xl font-bold xs:max-xl:text-slate-500">
-                    No Customers Created
-                  </p>
-                </div>
-              ) : (
-                <Customers navRes={navRes} setNavItems={setNavItems} setNewCustomer={setNewCustomer} setLoadingState={setLoadingState} setNavRes={setNavRes} />
-              )}
+          {navItems === "Customers" &&  (
+            <div className="bg-red-40 w-full h-full">
+                <Customers
+                  navRes={navRes}
+                  setNavItems={setNavItems}
+                  setNewCustomer={setNewCustomer}
+                  setLoadingState={setLoadingState}
+                  setNavRes={setNavRes}
+                />
             </div>
           )}
           {/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
@@ -585,7 +578,7 @@ function SideBar({ due, setDue }) {
           )}
 
           {/* --------------------------------------------------------------------------------------------------------------------------------------- */}
-            {/* transactions route */}
+          {/* transactions route */}
           {navItems === "Transactions" && (
             <Transactions
               loadingState={loadingState}
@@ -681,7 +674,6 @@ function SideBar({ due, setDue }) {
               )}
             </div>
           )}
-
 
           {navItems === "CreateNew" && customersNav === "createCustomer" && (
             <div className="bg-blue-40 absolute top-0 left-0 h-full w-full z-50 p-3">
