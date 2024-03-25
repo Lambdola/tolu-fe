@@ -1,17 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import baseUrl from '../helpers/getEnvironment';
+import postHook from '../fetchHooks/postHook';
 
-function Analytics({navRes}) {
+function Analytics() {
+  const [analytics, setAnalytics] = useState({
+    totalCustomers: 0,
+    totalPaid: 0,
+    totalInvoice: 0,
+    totalDebt: 0,
+    totalDebtCount: 0,
+    totalPaidCount: 0,
+  });
+
+  const [analyticsState, setAnalyticsState] = useState(true)
+  useEffect(() => {
+    async function analyticsData() {
+      try {
+        let user = localStorage.getItem("currentUser");
+        if (!user) return;
+        user = JSON.parse(user);
+        let url = baseUrl + "/itrack/analytics";
+        let response = await postHook(url, { sellerEmail: user.email });
+        // alert("l");
+        // alert(JSON.stringify(response));
+        if (response.sucess) {
+          // alert(JSON.stringify(response.sucess));
+          setAnalytics(response.sucess);
+        }
+        setAnalyticsState(false)
+      } catch (error) {
+        setAnalyticsState(false)
+        // alert("ola");
+        console.log(error);
+      } 
+      
+      
+      
+      
+    }
+    analyticsData();
+  }, []);
+
   return (
     <div className="flex xs:max-xl:flex-col xs:max-xl:gap-3 items-center justify-between">
+      {/* mobile view */}
     <div className="xl:hidden w-full flex justify-evenly bg-red-40">
       {[
         {
           title: "Total Customers",
-          data: navRes.dashboard.totalCustomers,
+          data: analytics.totalCustomers,
         },
         {
           title: "Total Payment",
-          data: navRes.dashboard.totalPaid,
+          data: analytics.totalPaid,
         },
       ].map((items) => {
         return (
@@ -20,21 +61,23 @@ function Analytics({navRes}) {
             className="w-[45%] bg-slate-50 rounded-lg py-5 px-4 space-y-2"
           >
             <p className="font-medium text-sm">{items.title}</p>
-            <p className="font-bold text-slate-500">{items.data}</p>
+            {analyticsState ? <div> <div className='h-5 w-5 rounded-full border border-t-gray-600 border-l-gray-200 border-r-gray-200 border-b-gray-200 animate-spin'></div> </div> :  <p className="font-bold text-slate-500">{items.data}</p> }
+           
           </div>
         );
       })}
     </div>
 
+{/* mobile view */}
     <div className="xl:hidden w-full flex justify-evenly bg-red-40">
       {[
         {
           title: "Total active Invoices",
-          data: navRes.dashboard.totalInvoice,
+          data: analytics.totalInvoice,
         },
         {
           title: "Total Debt",
-          data: navRes.dashboard.totalDebt,
+          data: analytics.totalDebt,
         },
       ].map((items) => {
         return (
@@ -45,32 +88,34 @@ function Analytics({navRes}) {
             <p className="font-medium text-sm">{items.title}</p>
             {items.title === "Total Debt" ? (
               <p className="font-bold text-red-600">
-                # {items.data?.toLocaleString("en-US")}
+                # {analyticsState ? <div> <div className='h-5 w-5 rounded-full border border-t-gray-600 border-l-gray-200 border-r-gray-200 border-b-gray-200 animate-spin'></div> </div> :  <p className="font-bold text-slate-500">{items.data}</p> }
               </p>
             ) : (
-              <p className="font-bold text-slate-500">{items.data}</p>
+              analyticsState ? <div> <div className='h-5 w-5 rounded-full border border-t-gray-600 border-l-gray-200 border-r-gray-200 border-b-gray-200 animate-spin'></div> </div> :  <p className="font-bold text-slate-500">{items.data}</p> 
+              // <p className="font-bold text-slate-500">{items.data}</p>
             )}
           </div>
         );
       })}
     </div>
 
+{/* desktop view */}
     {[
       {
         title: "Total Customers",
-        data: navRes.dashboard.totalCustomers,
+        data: analytics.totalCustomers,
       },
       {
         title: "Total Payment",
-        data: navRes.dashboard.totalPaid,
+        data: analytics.totalPaid,
       },
       {
         title: "Total active Invoices",
-        data: navRes.dashboard.totalInvoice,
+        data: analytics.totalInvoice,
       },
       {
         title: "Total Debt",
-        data: navRes.dashboard.totalDebt,
+        data: analytics.totalDebt,
       },
     ].map((items) => {
       return (

@@ -1,4 +1,11 @@
-import React from 'react'
+import React from 'react';
+import itrack_logo from "../images/itrack_logo.png";
+import drawer_handle from "../images/drawer_handle.png";
+import dashboard_logo from "../images/dashboard_logo.png";
+import customer_logo from "../images/customer_logo.png";
+import transaction_logo from "../images/transaction_logo.png";
+import invoice_logo from "../images/invoice_logo.png";
+import createnew_logo from "../images/createnew_logo.png";
 
 function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
     return (

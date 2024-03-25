@@ -13,15 +13,17 @@ import Dashboard from "../components/Dashboard";
 import CollapseSideBar from "../components/CollapseSideBar";
 import ExpandSideBar from "../components/ExpandSideBar";
 import postHook from "../fetchHooks/postHook";
+import Notifications from "../components/Notifications";
 
 let dotEnv = import.meta.env;
 
 function SideBar({ due, setDue }) {
   const navigate = useNavigate();
+  const [navItems, setNavItems] = useState("Dashboard");
   const [showDues, setShowDues] = useState(false);
   const [showInvoice, setShowInvoice] = useState(false);
   const [user, setUser] = useState("");
-  const [navItems, setNavItems] = useState("Dashboard");
+
   const [customersNav, setCustomersNav] = useState("");
   const [transactNav, setTransactNav] = useState("all");
   const [navBarState, setNavBarState] = useState("expand");
@@ -273,73 +275,73 @@ function SideBar({ due, setDue }) {
     //     setNavRes({ ...navRes, customers: "" });
     //   }
     // }
-    if (param === "Transactions") {
-      try {
-        url = baseUrl + "/itrack/transactions";
-        response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sellerEmail: user.email }),
-        });
-        data = await response.json();
-        if (response.status === 200) {
-          setLoadingState(false);
-          localStorage.setItem("transactions", JSON.stringify(data.message));
-          setNavRes({ ...navRes, transaction: data.message });
-        } else {
-          setLoadingState(false);
-          // localStorage.setItem("transactions", JSON.stringify(data.message));
-          setNavRes({ ...navRes, transaction: "" });
-        }
-      } catch (error) {
-        setLoadingState(false);
-        setNavRes({ ...navRes, transaction: "" });
-      }
-    }
-    if (param === "Invoices") {
-      let hold = { customer: "", transaction: "" };
+    // if (param === "Transactions") {
+    //   try {
+    //     url = baseUrl + "/itrack/transactions";
+    //     response = await fetch(url, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ sellerEmail: user.email }),
+    //     });
+    //     data = await response.json();
+    //     if (response.status === 200) {
+    //       setLoadingState(false);
+    //       localStorage.setItem("transactions", JSON.stringify(data.message));
+    //       setNavRes({ ...navRes, transaction: data.message });
+    //     } else {
+    //       setLoadingState(false);
+    //       // localStorage.setItem("transactions", JSON.stringify(data.message));
+    //       setNavRes({ ...navRes, transaction: "" });
+    //     }
+    //   } catch (error) {
+    //     setLoadingState(false);
+    //     setNavRes({ ...navRes, transaction: "" });
+    //   }
+    // }
+    // if (param === "Invoices") {
+    //   let hold = { customer: "", transaction: "" };
 
-      try {
-        url = baseUrl + "/itrack/customers";
-        response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sellerEmail: user.email }),
-        });
-        data = await response.json();
-        if (response.status === 200) {
-          setLoadingState(false);
-          hold.customer = data.message;
-        } else {
-          setLoadingState(false);
-          data.message = "";
-        }
-      } catch (error) {
-        setLoadingState(false);
-        setNavRes({ ...navRes, customers: "" });
-      }
+    //   try {
+    //     url = baseUrl + "/itrack/customers";
+    //     response = await fetch(url, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ sellerEmail: user.email }),
+    //     });
+    //     data = await response.json();
+    //     if (response.status === 200) {
+    //       setLoadingState(false);
+    //       hold.customer = data.message;
+    //     } else {
+    //       setLoadingState(false);
+    //       data.message = "";
+    //     }
+    //   } catch (error) {
+    //     setLoadingState(false);
+    //     setNavRes({ ...navRes, customers: "" });
+    //   }
 
-      try {
-        url = baseUrl + "/itrack/transactions";
-        response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sellerEmail: user.email }),
-        });
-        data = await response.json();
-        setLoadingState(false);
-        localStorage.setItem("transactions", JSON.stringify(data.message));
-        hold.transaction = data.mesage;
-        setNavRes({
-          ...navRes,
-          customers: hold.customer,
-          transaction: data.message,
-        });
-      } catch (error) {
-        setLoadingState(false);
-        setNavRes({ ...navRes, invoices: "" });
-      }
-    }
+    //   try {
+    //     url = baseUrl + "/itrack/transactions";
+    //     response = await fetch(url, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ sellerEmail: user.email }),
+    //     });
+    //     data = await response.json();
+    //     setLoadingState(false);
+    //     localStorage.setItem("transactions", JSON.stringify(data.message));
+    //     hold.transaction = data.mesage;
+    //     setNavRes({
+    //       ...navRes,
+    //       customers: hold.customer,
+    //       transaction: data.message,
+    //     });
+    //   } catch (error) {
+    //     setLoadingState(false);
+    //     setNavRes({ ...navRes, invoices: "" });
+    //   }
+    // }
   }
 
   function handleCreateNew(param) {
@@ -443,7 +445,7 @@ function SideBar({ due, setDue }) {
   }
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
-    <div className="overflow-scroll">
+    <div className="overflow-auto">
       {/* for desktop view */}
       <div className="xs:max-xl:hidden">
         {navBarState === "expand" ? (
@@ -476,7 +478,7 @@ function SideBar({ due, setDue }) {
       </div>
 
       <div
-        className={` fixed z-10 h-full overflow-scroll right-0 top-0 ${
+        className={` fixed z-10 h-full overflow-auto right-0 top-0 ${
           navBarState === "expand"
             ? "left-[20%] bg-green-40 xs:max-xl:left-0"
             : "left-[5%] bg-yellow-40 xs:max-xl:left-0"
@@ -523,36 +525,7 @@ function SideBar({ due, setDue }) {
               </div>
             )}
 
-            <div className="z-50 relative w-10 h-10 bg-red-40 flex items-center justify-center">
-              <div
-                onClick={() => setShowDues(!showDues)}
-                className="relative w-full h-full bg-slate-100 hover:bg-slate-300 flex items-center justify-center rounded-full shadow shadow-slate-400"
-              >
-                {!(due === "") && (
-                  <div className="top-2 right-2 absolute w-3 h-3 rounded-full bg-red-700"></div>
-                )}
-                <NotificationsNoneIcon sx={{ fontSize: 30 }} />
-              </div>
-              <div className="absolute -bottom-16 -right-28 z-50">
-                {showDues &&
-                  due !== "" &&
-                  due.map((item) => {
-                    return (
-                      <div className="flex w-80 justify-between h-10 items-center p-2 text-xl bg-slate-50">
-                        <div className="w-4 h-4 rounded-full bg-red-600 flex items-center justify-center">
-                          !
-                        </div>
-                        <div>
-                          <p classNme="text-red-600">Unpaid Invoices</p>
-                          <p className=" text-red-600 text-[15px]">
-                            You still have unpaid invoices for {item.customer} 
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
+<Notifications setShowDues={setShowDues} showDues={showDues} due={due} />
 
             <div className="relative w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center">
               <div className="absolute -bottom-0 -right-1 w-5 h-5 p-1 rounded-full bg-slate-100">
@@ -616,6 +589,7 @@ function SideBar({ due, setDue }) {
           {navItems === "Transactions" && (
             <Transactions
               loadingState={loadingState}
+              setLoadingState={setLoadingState}
               navRes={navRes}
               navBarState={navBarState}
               setCreateNewOptions={setCreateNewOptions}

@@ -40,7 +40,7 @@ function Login({ userDetails, setUserDetails }) {
         });
         let data = await response.json();
         if (response.status === 200) {
-          localStorage.setItem("currentUser", JSON.stringify(data.message));
+          localStorage.setItem("currentUserId", JSON.stringify(data.message));
           setBtnState(false);
           navigate("/user/home");
         } else {

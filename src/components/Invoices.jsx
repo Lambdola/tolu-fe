@@ -2,7 +2,9 @@ import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import MoreVertOutlined from "@mui/icons-material/MoreVertOutlined";
 import OpenInNew from "@mui/icons-material/OpenInNew";
 import RemoveRedEyeOutlined from "@mui/icons-material/RemoveRedEyeOutlined";
-import React from "react";
+import React, { useEffect } from "react";
+import baseUrl from "../helpers/getEnvironment";
+import postHook from "../fetchHooks/postHook";
 
 function Invoices({
   setCreateNewOptions,
@@ -11,6 +13,64 @@ function Invoices({
   showInvoice,
   setShowInvoice,
 }) {
+  useEffect(() => {
+    async function invoicesData() {
+        let hold = { customer: "", transaction: "" };
+        try {
+          let url_1 = baseUrl + "/itrack/customers";
+          let url_2 = baseUrl + "/itrack/transactions";
+          let [customers, transactions ] = await Promise.all([ postHook(url_1, { sellerEmail: user.email }), postHook(url_2, { sellerEmail: user.email } ) ])
+          alert(JSON.stringify(customers))
+          alert(JSON.stringify(transactions))
+        } catch(error) {
+          alert(error)
+        }
+  
+        // try {
+        //   url = baseUrl + "/itrack/customers";
+        //   response = await fetch(url, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ sellerEmail: user.email }),
+        //   });
+        //   data = await response.json();
+        //   if (response.status === 200) {
+        //     setLoadingState(false);
+        //     hold.customer = data.message;
+        //   } else {
+        //     setLoadingState(false);
+        //     data.message = "";
+        //   }
+        // } catch (error) {
+        //   setLoadingState(false);
+        //   setNavRes({ ...navRes, customers: "" });
+        // }
+  
+        // try {
+        //   url = baseUrl + "/itrack/transactions";
+        //   response = await fetch(url, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ sellerEmail: user.email }),
+        //   });
+        //   data = await response.json();
+        //   setLoadingState(false);
+        //   localStorage.setItem("transactions", JSON.stringify(data.message));
+        //   hold.transaction = data.mesage;
+        //   setNavRes({
+        //     ...navRes,
+        //     customers: hold.customer,
+        //     transaction: data.message,
+        //   });
+        // } catch (error) {
+        //   setLoadingState(false);
+        //   setNavRes({ ...navRes, invoices: "" });
+        // }
+      // }
+    }
+    invoicesData()
+
+  }, [])
   return (
     <div>
       <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3 xs:max-xl:p-0">

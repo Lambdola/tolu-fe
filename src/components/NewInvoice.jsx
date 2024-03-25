@@ -13,17 +13,17 @@ function NewInvoice({
   createNewOptions,
 }) {
   return (
-    <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll p-3">
-      <div className="relative w-full h-full overflow-scroll">
-        <p className="text-slate-700 text-xl font-semibold mb-1 xs:max-xl:text-base">
+    <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-auto p-3">
+      <div className="relative w-full h-full overflow-auto">
+        <p className="text-slate-700 text-xl font-semibold mb-1 xs:max-xl:text-2xl xs:max-xl:text-black">
           Create Invoice
         </p>
-        <div className="absolute w-full bg-gray-100 xs:max-xl:bg-white shadow-md shadow-slate-400 xs:max-xl:shadow-transparent  h-[70vh] xs:max-xl:h-auto overflow-scroll">
-          <div className="flex xs:max-xl:flex-col xs:max-xl:space-y-5 justify-between xs:max-xl:justify-start xs:max-xl:items-start items-center bg-red-40 border-b-2 border-slate-400 xs:max-xl:border-transparent p-5 xs:max-xl:p-0">
+        <div className="absolute w-full bg-gray-100 xs:max-xl:bg-white shadow-md shadow-slate-400 xs:max-xl:shadow-transparent h-[70vh] xs:max-xl:h-auto overflow-auto xs:max-xl:mt-5">
+          <div className="flex xs:max-xl:flex-col xs:max-xl:space-y-10 justify-between xs:max-xl:justify-start xs:max-xl:items-start items-center bg-red-40 border-b-2 border-slate-400 xs:max-xl:border-transparent p-5 xs:max-xl:p-0">
             <div className="w-[45%] xs:max-xl:w-full space-y-2">
               <div className="flex gap-2 items-center">
                 <div className="w-8 h-8 rounded-md bg-purple-600"></div>
-                <p className="text-slate-600 font-bold">Lena Stores</p>
+                <p className="text-slate-600 font-bold xs:max-xl:text-lg">Lena Stores</p>
               </div>
               <p className="font-light text-slate-600 xs:max-xl:text-slate-900 xs:max-xl:font-normal">
                 (903) 545-2453 11953 County Rd #247 Oakwood, Texas(TX), 75855l

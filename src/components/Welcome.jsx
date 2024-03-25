@@ -3,11 +3,11 @@ import dashboard_multi from "../images/dashboard_multi.png";
 
 function Welcome({setNavItems}) {
   return (
-    <div className="w-[25%] xs:max-xl:w-full flex flex-col rounded-md xs:max-xl:rounded-xl overflow-hidden bg-slate-50 shadow shadow-slate-300 xs:max-xl:space-y-5">
-    <div className="bg-[#8347E7] h-36 xs:max-xl:h-auto overflow-hidden">
+    <div className="w-full xs:max-xl:w-full flex flex-col rounded-md xs:max-xl:rounded-xl overflow-hidden bg-slate-50 shadow shadow-slate-300 xs:max-xl:space-y-5">
+    <div className="bg-[#8347E7] w-full h-36 xs:max-xl:h-auto overflow-hidden">
       <img
         src={dashboard_multi}
-        className="h-full w-full object-fit xs:max-xl:object-cover overflow-hidden"
+        className="h-full w-full object-cover xs:max-xl:object-cover overflow-hidden"
       />
     </div>
     <div className="pt-2 px-5">

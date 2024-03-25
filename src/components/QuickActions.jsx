@@ -6,7 +6,7 @@ import logo_blue from "../images/logo_blue.png";
 
 function QuickActions() {
   return (
-    <div>
+    <div className='h-full bg-red-40'>
     <p className="py-2 text-black font-bold text">
       What would you like to get started with ?
     </p>
@@ -60,7 +60,7 @@ function QuickActions() {
                     >
                       <img
                         src={logo_blue}
-                        className="xs:max-xl:h-10 xs:max-xl:w-10"
+                        className="xs:max-xl:h-8 xs:max-xl:w-8 size"
                       />
                     </div>
                   ) : (
@@ -72,7 +72,7 @@ function QuickActions() {
                     >
                       <img
                         src={logo_blue}
-                        className="xs:max-xl:h-10 xs:max-xl:w-10"
+                        className="xs:max-xl:h-8 xs:max-xl:w-8"
                       />
                     </div>
                   )}
