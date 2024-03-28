@@ -6,6 +6,7 @@ import customer_logo from "../images/customer_logo.png";
 import transaction_logo from "../images/transaction_logo.png";
 import invoice_logo from "../images/invoice_logo.png";
 import createnew_logo from "../images/createnew_logo.png";
+import { useNavigate } from 'react-router-dom';
 let dotEnv = import.meta.env;
 
 function ExpandSideBar({
@@ -25,6 +26,7 @@ function ExpandSideBar({
     } else {
       baseUrl = dotEnv.VITE_PROD_URL;
     }
+    const navigate = useNavigate()
   
     return (
       <div className="fixed z-20 left-0 top-0 h-full w-[20%] bg-slate-50">
@@ -52,9 +54,7 @@ function ExpandSideBar({
         <ul className="mx-5 space-y-5 my-5 bg-red-30">
           <li
             onClick={() => {
-              getResponse("Dashboard");
-              setNavItems("Dashboard");
-              setCustomersNav("");
+              navigate("/user/home")
             }}
             className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
               !(navItems === "Dashboard") ? "bg-none" : "bg-purple-200"
@@ -70,9 +70,7 @@ function ExpandSideBar({
           </li>
           <li
             onClick={() => {
-              setNavItems("Customers");
-              getResponse("Customers");
-              setCustomersNav("");
+              navigate("/user/customers")
             }}
             className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
               !(navItems === "Customers") ? "bg-none" : "bg-purple-200"
@@ -88,9 +86,7 @@ function ExpandSideBar({
           </li>
           <li
             onClick={() => {
-              setNavItems("Transactions");
-              getResponse("Transactions");
-              setCustomersNav("");
+              navigate("/user/transactions")
             }}
             className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
               !(navItems === "Transactions") ? "bg-none" : "bg-purple-200"
@@ -105,7 +101,7 @@ function ExpandSideBar({
               <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
             )}
           </li>
-          {navItems === "Transactions" && (
+          {window.location.pathname.includes("transactions") && (
             <div className="ml-5 space-y-5 bg-red-60 w-full">
               <div
                 onClick={() => handleTransact("all")}
@@ -163,9 +159,7 @@ function ExpandSideBar({
           )}
           <li
             onClick={() => {
-              setNavItems("Invoices");
-              getResponse("Invoices");
-              setCustomersNav("");
+              navigate("/user/invoices")
             }}
             className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
               !(navItems === "Invoices") ? "bg-none" : "bg-purple-200"
@@ -181,7 +175,8 @@ function ExpandSideBar({
           </li>
           <li
             onClick={() => {
-              setNavItems("CreateNew");
+              navigate("/user/create-new")
+          
             }}
             className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
               !(navItems === "CreateNew") ? "bg-none" : "bg-purple-200"
@@ -200,7 +195,7 @@ function ExpandSideBar({
               </div>
             )}
   
-            {navItems === "CreateNew" && (
+            {    window.location.pathname.includes("create-new") && (
               <>
                 <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
                 <div

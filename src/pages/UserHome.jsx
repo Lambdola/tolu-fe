@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import BottonNav from "../components/BottonNav";
 import Transactions from "../components/Transactions";
-import Customers from "../components/Customers";
+import Customers from "./Customers";
 import NewCustomer from "../components/NewCustomer";
 import Invoices from "../components/Invoices";
 import NewInvoice from "../components/NewInvoice";
@@ -573,9 +573,9 @@ function SideBar({ due, setDue }) {
           )}
           {/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           {/* New Customer Added Info Display */}
-          {navItems === "Customers" && newCustomer.firstName && (
+          {/* {navItems === "Customers" && newCustomer.firstName && (
             <NewCustomer newCustomer={newCustomer} />
-          )}
+          )} */}
 
           {/* --------------------------------------------------------------------------------------------------------------------------------------- */}
           {/* transactions route */}
@@ -589,7 +589,6 @@ function SideBar({ due, setDue }) {
               createNewOptions={createNewOptions}
               setNavItems={setNavItems}
             />
-            // <p>ola</p>
           )}
 
           {/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}

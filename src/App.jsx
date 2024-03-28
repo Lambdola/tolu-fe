@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Customers from "./pages/Customers";
+import Customers from "./components/Customers";
 import SignUp from "./pages/SignUp";
 import io from 'socket.io-client'
 import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
 import GeneratePLink from './pages/GeneratePLink';
+import baseUrl from './helpers/getEnvironment';
+import ExpandSideBar from './components/ExpandSideBar';
+import CollapseSideBar from './components/CollapseSideBar';
+import BottonNav from './components/BottonNav';
 let dotEnv = import.meta.env
 
 
 
 
 function App() {
+  const [navBarState, setNavBarState] = useState("expand");
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -29,15 +34,6 @@ function App() {
   })
   const [due, setDue] = useState("")
 
-
-  // alert(dotEnv.MODE)
-
-  let baseUrl;
-  if (dotEnv.MODE === "development") {
-    baseUrl = "http://localhost:3000";
-  } else {
-    baseUrl = "https://itrack-server.vercel.app";
-  }
 
   const socket = io(baseUrl)
 
@@ -86,15 +82,51 @@ function App() {
  
 
   return (
-    <Routes>
+    <div>
+         <div className="overflow-aut">
+      {/* for desktop view */}
+      <div className="xs:max-xl:hidden">
+        
+        {navBarState === "expand" ? (
+          <ExpandSideBar
+            // navItems={navItems}
+            // setNavItems={setNavItems}
+            // setNavBarState={setNavBarState}
+            // getResponse={getResponse}
+            // handleTransact={handleTransact}
+            // transactNav={transactNav}
+            // setCustomersNav={setCustomersNav}
+            // handleCreateNew={handleCreateNew}
+            // customersNav={customersNav}
+          />
+        ) : (
+          <CollapseSideBar
+            // navItems={navItems}
+            // setNavItems={setNavItems}
+            // setNavBarState={setNavBarState}
+          />
+        )}
+      </div>
+      {/* for mobile view */}
+      <div className="xl:hidden">
+        <BottonNav
+          // navItems={navItems}
+          // setNavItems={setNavItems}
+          // setNavBarState={setNavBarState}
+        />
+      </div>
+      </div>
+         <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/customers" element={<Customers />} />
+      <Route path="/user/customers" element={<Customers />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/user/home" element={<UserHome due={due} setDue={setDue}  />} />
       <Route path="/generate-link" element={<GeneratePLink />} />
     </Routes>
+    </div>
+ 
   )
 }
 

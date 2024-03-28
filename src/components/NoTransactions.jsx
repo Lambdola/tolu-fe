@@ -11,13 +11,7 @@ function NoTransactions() {
         </p>
         <div>
           <button
-            onClick={() => {
-              // setNavItems("Invoices");
-              setCreateNewOptions({
-                ...createNewOptions,
-                invoice: true,
-              });
-            }}
+            // onClick={c}
             className="hover:bg-green-500 p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 text-lg"
           >
             New Transaction
