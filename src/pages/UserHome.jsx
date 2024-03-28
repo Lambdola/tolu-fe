@@ -18,7 +18,7 @@ import NewCustomerAlert from "../components/NewCustomerAlert";
 
 let dotEnv = import.meta.env;
 
-function SideBar({ due, setDue }) {
+function SideBar({ due, setDue, navBarState }) {
   const navigate = useNavigate();
   const [navItems, setNavItems] = useState("Dashboard");
   const [showDues, setShowDues] = useState(false);
@@ -27,7 +27,6 @@ function SideBar({ due, setDue }) {
 
   const [customersNav, setCustomersNav] = useState("");
   const [transactNav, setTransactNav] = useState("all");
-  const [navBarState, setNavBarState] = useState("expand");
   const [navRes, setNavRes] = useState({
     dashboard: "",
     customers: "",
@@ -241,108 +240,7 @@ function SideBar({ due, setDue }) {
   async function getResponse(param) {
     setNewCustomer("");
     setCreateNewOptions({ ...createNewOptions, invoice: false });
-    // setLoadingState(true);
-    let response, data;
-    // if (param === "Dashboard") {
-    //   try {
-    //     url = baseUrl + "/itrack/dashboard";
-    //     let response = await postHook(url, { sellerEmail: user.email }  )
-    //     if (response.sucess) {
-    //       setNavRes({ ...navRes, dashboard: data.message });
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-    // if (param === "Customers") {
-    //   setNewCustomer("");
-    //   try {
-    //     url = baseUrl + "/itrack/customers";
-    //     response = await fetch(url, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ sellerEmail: user.email }),
-    //     });
-    //     data = await response.json();
-    //     if (response.status === 200) {
-    //       setLoadingState(false);
-    //       setNavRes({ ...navRes, customers: data.message });
-    //     } else {
-    //       setLoadingState(false);
-    //       setNavRes({ ...navRes, customers: "" });
-    //     }
-    //   } catch (error) {
-    //     setLoadingState(false);
-    //     setNavRes({ ...navRes, customers: "" });
-    //   }
-    // }
-    // if (param === "Transactions") {
-    //   try {
-    //     url = baseUrl + "/itrack/transactions";
-    //     response = await fetch(url, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ sellerEmail: user.email }),
-    //     });
-    //     data = await response.json();
-    //     if (response.status === 200) {
-    //       setLoadingState(false);
-    //       localStorage.setItem("transactions", JSON.stringify(data.message));
-    //       setNavRes({ ...navRes, transaction: data.message });
-    //     } else {
-    //       setLoadingState(false);
-    //       // localStorage.setItem("transactions", JSON.stringify(data.message));
-    //       setNavRes({ ...navRes, transaction: "" });
-    //     }
-    //   } catch (error) {
-    //     setLoadingState(false);
-    //     setNavRes({ ...navRes, transaction: "" });
-    //   }
-    // }
-    // if (param === "Invoices") {
-    //   let hold = { customer: "", transaction: "" };
-
-    //   try {
-    //     url = baseUrl + "/itrack/customers";
-    //     response = await fetch(url, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ sellerEmail: user.email }),
-    //     });
-    //     data = await response.json();
-    //     if (response.status === 200) {
-    //       setLoadingState(false);
-    //       hold.customer = data.message;
-    //     } else {
-    //       setLoadingState(false);
-    //       data.message = "";
-    //     }
-    //   } catch (error) {
-    //     setLoadingState(false);
-    //     setNavRes({ ...navRes, customers: "" });
-    //   }
-
-    //   try {
-    //     url = baseUrl + "/itrack/transactions";
-    //     response = await fetch(url, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ sellerEmail: user.email }),
-    //     });
-    //     data = await response.json();
-    //     setLoadingState(false);
-    //     localStorage.setItem("transactions", JSON.stringify(data.message));
-    //     hold.transaction = data.mesage;
-    //     setNavRes({
-    //       ...navRes,
-    //       customers: hold.customer,
-    //       transaction: data.message,
-    //     });
-    //   } catch (error) {
-    //     setLoadingState(false);
-    //     setNavRes({ ...navRes, invoices: "" });
-    //   }
-    // }
+   
   }
 
   function handleCreateNew(param) {
@@ -447,37 +345,6 @@ function SideBar({ due, setDue }) {
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
     <div className="overflow-aut">
-      {/* for desktop view */}
-      <div className="xs:max-xl:hidden">
-        {navBarState === "expand" ? (
-          <ExpandSideBar
-            navItems={navItems}
-            setNavItems={setNavItems}
-            setNavBarState={setNavBarState}
-            getResponse={getResponse}
-            handleTransact={handleTransact}
-            transactNav={transactNav}
-            setCustomersNav={setCustomersNav}
-            handleCreateNew={handleCreateNew}
-            customersNav={customersNav}
-          />
-        ) : (
-          <CollapseSideBar
-            navItems={navItems}
-            setNavItems={setNavItems}
-            setNavBarState={setNavBarState}
-          />
-        )}
-      </div>
-      {/* for mobile view */}
-      <div className="xl:hidden">
-        <BottonNav
-          navItems={navItems}
-          setNavItems={setNavItems}
-          setNavBarState={setNavBarState}
-        />
-      </div>
-
       <div
         className={` fixed xs:max-xl:relative bg-red-40 z-10 h-full xs:max-xl:h-screen overflow-auto right-0 top-0 ${
           navBarState === "expand"

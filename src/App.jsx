@@ -91,7 +91,7 @@ function App() {
           <ExpandSideBar
             // navItems={navItems}
             // setNavItems={setNavItems}
-            // setNavBarState={setNavBarState}
+            setNavBarState={setNavBarState}
             // getResponse={getResponse}
             // handleTransact={handleTransact}
             // transactNav={transactNav}
@@ -103,7 +103,7 @@ function App() {
           <CollapseSideBar
             // navItems={navItems}
             // setNavItems={setNavItems}
-            // setNavBarState={setNavBarState}
+            setNavBarState={setNavBarState}
           />
         )}
       </div>
@@ -122,7 +122,7 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
-      <Route path="/user/home" element={<UserHome due={due} setDue={setDue}  />} />
+      <Route path="/user/home" element={<UserHome due={due} setDue={setDue} navBarState={navBarState}  />} />
       <Route path="/generate-link" element={<GeneratePLink />} />
     </Routes>
     </div>
