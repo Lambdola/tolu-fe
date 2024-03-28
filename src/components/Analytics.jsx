@@ -21,16 +21,14 @@ function Analytics() {
         user = JSON.parse(user);
         let url = baseUrl + "/itrack/analytics";
         let response = await postHook(url, { sellerEmail: user.email });
-        // alert("l");
-        // alert(JSON.stringify(response));
+        
         if (response.sucess) {
-          // alert(JSON.stringify(response.sucess));
           setAnalytics(response.sucess);
         }
         setAnalyticsState(false);
       } catch (error) {
         setAnalyticsState(false);
-        // alert("ola");
+      
         console.log(error);
       }
     }
